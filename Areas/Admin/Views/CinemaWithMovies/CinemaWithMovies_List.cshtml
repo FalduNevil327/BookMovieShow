@@ -1,0 +1,224 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Cinema With Movies List";
+}
+
+
+@using System.Data;
+@model DataTable;
+@using BookMovieShow.Areas.Admin.Model
+@{
+    CinemaWithMovies_FilterModel FilterModel = new CinemaWithMovies_FilterModel();
+
+}
+
+<main id="main" class="main">
+
+    @if (TempData["Msg"] != null)
+    {
+        <div id="Feature-alert" class="alert alert-success color-success">
+            <i class="bi bi-check-circle"></i> @TempData["Msg"]
+        </div>
+
+        <script>
+            setTimeout(function () {
+                $('#Feature-alert').fadeOut('fast');
+            }, 2000); // 2 seconds
+        </script>
+    }
+    <!--Heading-->
+    <div class="pagetitle">
+        <h1>Cinema With Movies List</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Admin" asp-action="Admin_DashBoard">Home</a></li>
+                <li class="breadcrumb-item active">Cinema</li>
+            </ol>
+        </nav>
+    </div>
+    <!--End Heading-->
+
+    <!-- Filter-->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Filter</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="CinemaWithMovies" asp-action="CinemaWithMovies_Filter">
+
+                <div class="col-md-4">
+                    <select class="form-select" asp-for="@FilterModel.CinemaName" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaName","CinemaName"))">
+                        <option value="">Select Cinema</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <select class="form-select" asp-for="@FilterModel.Title" asp-items="@(new SelectList(ViewBag.MovieList,"Title","Title"))">
+                        <option value="">Select Movie</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+    <!--End Filter-->
+
+    <!--Start ListPage-->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="d-flex justify-content-between card-header">
+
+                        @* <div class="col-6"></div> *@
+                        <div class="col-md-4" style="margin-inline-start: auto;">
+                            <a type="button" class="btn btn-outline-dark" asp-area="Admin" asp-controller="CinemaWithMovies" asp-action="CinemaWithMovies_Add">
+                                Add
+                            </a>
+
+                            <a type="button" class="btn btn-outline-primary" asp-area="Admin" asp-controller="CinemaWithMovies" asp-action="ExportsToExcel">
+                                Export
+                            </a>
+
+                            <a type="button" class="btn btn-outline-danger" id="deleteSelectedBtn" asp-area="Admin" asp-controller="CinemaWithMovies" asp-action="CinemaWithMovies_MultipleDelete">Multiple Delete</a>
+                        </div>
+
+
+                    </div>
+                    <div class="card-body">
+                        <!-- Table with hoverable rows -->
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    @*<th>Check</th>*@
+                                    <th><input type="checkbox" class="selectall" name="sample"></th>
+                                    @* <th scope="col">ID</th> *@
+                                    <th scope="col">Cinema Name</th>
+                                    <th scope="col">Movie Name</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow dr in Model.Rows)
+                                {
+                                    <tr>
+                                        <td><input type="checkbox" class="chkDelete" name="chkDeleteName" value="@dr["ID"]"></td>
+                                        @* <td>@dr["ID"]</td> *@
+                                        <td>@dr["CinemaName"]</td>
+                                        <td>@dr["Title"]</td>
+                                        <td>
+                                            <div class="d-flex" style="justify-content: center;">
+
+                                                <div class="me-2">
+                                                    <form method="post" asp-area="Admin" asp-controller="CinemaWthMovies" asp-action="CinemaWthMovies_Delete">
+                                                        <input type="hidden" value="@Convert.ToInt32(dr["ID"])" name="ID" />
+
+                                                        <button type="submit" class="btn btn-danger" value="Delete" onclick="return fun1();"><i class="bi bi-bucket"></i></button>
+                                                    </form>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <form asp-area="Admin" asp-controller="CinemaWthMovies" asp-action="CinemaWthMovies_Add">
+                                                        <input type="hidden" value="@Convert.ToInt32(dr["ID"])" name="ID" />
+                                                        <button type="submit" class="btn btn-success"><i class="bi bi-pen"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with hoverable rows -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End ListPage-->
+
+</main>
+
+
+
+@section Scripts
+{
+
+    <!--SelectAll-->
+    <script>
+        $('.selectall').click(function () {
+            if ($(this).is(':checked')) {
+                $('td input').attr('checked', true);
+            } else {
+                $('td input').attr('checked', false);
+            }
+        });
+    </script>
+    <!--End SelectAll-->
+    <!--Multiple Delete-->
+    <script>
+        $(document).ready(function () {
+            console.log("Hello");
+            $("#deleteSelectedBtn").on("click", function (e) {
+                var confirmation = confirm("Are you sure?")
+                if (confirmation) {
+
+                    e.preventDefault();
+                    var data = [];
+                    $("input[name='chkDeleteName']:checked").each(function () {
+                        data.push($(this).val());
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("CinemaWithMovies_MultipleDelete")",
+                        data: { id: data },
+                        traditional: true,
+                        success: function (result) {
+                            //alert("done");
+                            alert("Delete Success")
+                            location.reload();
+                        }
+                    })
+                }
+                else
+                    alert("Delete Canceled")
+            })
+        })
+
+    </script>
+    <!--End Multiple Delete-->
+    <!--Agex Search-->
+    <script>
+        $(document).ready(function () {
+            $("#sample_1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#sample_2 tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <!--End Agex Search-->
+    <!--Alert-->
+    <script>
+        function fun1() {
+            if (confirm("Are you sure you want to delete?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+    <!--End Alert-->
+}
+
+
+

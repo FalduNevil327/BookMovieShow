@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Cinema Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model BookMovieShow.Areas.Admin.Model.MST_CinemaModel
+
+<main id="main" class="main">
+    <h1><u><b>Cinema Details Of @Model.CinemaName</b></u></h1>
+    <br />
+    <div class="Col">
+
+        <div class="row">
+            @*<div class="col-lg-6">*@
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Cinema Information</h5>
+                        <dl class="row">
+                            <dt class="col-sm-4">Cinema Name :</dt>
+                            <dd class="col-sm-8">@Model.CinemaName</dd>
+
+                            <dt class="col-sm-4">State :</dt>
+                            @* <dd class="col-sm-8">@Model.StateName</dd> *@
+
+                        <dt class="col-sm-4">City :</dt>
+                        @* <dd class="col-sm-8">@Model.CityName</dd> *@
+
+                            <dt class="col-sm-4">Capacity :</dt>
+                            <dd class="col-sm-8">@Model.Capacity</dd>
+
+                            <dt class="col-sm-4">Screen Number :</dt>
+                            <dd class="col-sm-8">@Model.ScreenNumber</dd>
+                        </dl>
+                    </div>
+                </div>
+            @*</div>*@
+        </div>
+    </div>
+
+
+    <br />
+
+    <div>
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Cinema" asp-action="MST_CinemaList">Back to Cinema List</a>
+    </div>
+</main>
+
+
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({
+                items: 3, // Adjust the number of items displayed
+                margin: 15,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 2000, // Adjust the autoplay timeout
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+
+
+@*<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Associated Movies</h5>
+            @if (Model.MovieLists != null && Model.MovieLists.Any())
+            {
+                <ul>
+                    @foreach (var movie in Model.MovieLists)
+                    {
+                        <li>
+                            <h1>@movie.MovieID</h1>
+                            <img src="@movie.PosterImageURL">
+                            <strong>@movie.Title</strong>
+                            <p>@movie.Genre</p>
+                            <!-- Add other movie details as needed -->
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No associated movies.</p>
+            }
+        </div>
+    </div>
+</div>*@

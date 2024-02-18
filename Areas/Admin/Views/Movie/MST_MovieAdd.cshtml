@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "Movie Add/Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@model BookMovieShow.Areas.Admin.Model.MST_MovieModel
+
+<main id="main" class="main">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Movie Add/Edit Page</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="Movie" asp-action="MST_MovieSave">
+                @Html.HiddenFor(x => x.MovieID)
+
+                <div class="col-md-12">
+                    <label>Movie Title </label>
+                    <input type="text" class="form-control" placeholder="Enter Movie Name" asp-for="Title">
+                </div>
+
+                <div class="col-md-12">
+                    <label>Description</label>
+                    <input type="text" class="form-control" placeholder="Enter Description" asp-for="Description">
+                </div>
+                <div class="col-md-12">
+                    <label>Release Date</label>
+                    <input type="date" class="form-control" placeholder="Enter Genre" asp-for="ReleaseDate">
+                </div>
+
+                <div class="col-md-12">
+                    <label>Genre</label>
+                    <input type="text" class="form-control" placeholder="Enter Genre" asp-for="Genre">
+                </div>
+                <div class="col-md-12">
+                    <label>Language</label>
+                    <input type="text" class="form-control" placeholder="Enter Language" asp-for="Language">
+                </div>
+                <div class="col-md-12">
+                    <label>Duration</label>
+                    <input type="text" class="form-control" placeholder="Select Duration Time" asp-for="Duration">
+                </div>
+                <div class="col-md-12">
+                    <label>Director</label>
+                    <input type="text" class="form-control" placeholder="Enter Director Name" asp-for="Director">
+                </div>
+                <div class="col-md-12">
+                    <label>Rating</label>
+                    <input type="number" class="form-control" placeholder="Enter Rating" asp-for="Rating">
+                </div>
+                <div class="col-md-12">
+                    <label>Poster Image URL</label>
+                    <input type="url" class="form-control" placeholder="Enter Poster Image URL" asp-for="PosterImageURL">
+                </div>
+                <div class="col-md-12">
+                    <label>Trailer URL</label>
+                    <input type="url" class="form-control" placeholder="Enter Trailer URL" asp-for="TrailerURL">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Movie" asp-action="MST_MovieList">Back</a>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    @* <form method="post" asp-area="Admin" asp-controller="Movie" asp-action="MST_MovieSave">
+        @Html.HiddenFor(x=>x.MovieID)
+        @*<div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label>Movie Title</label>
+            <input type="text"  asp-for="Title" class="form-control" placeholder="Enter Movie Name " />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text"  asp-for="Description" class="form-control" placeholder="Enter Description" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+        <label>Release Date</label>
+            <input type="date" asp-for="ReleaseDate" class="form-control"  />
+            <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Duration</label>
+            <input type="text"  asp-for="Duration" class="form-control" placeholder="Enter Duration" />
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Language</label>
+            <input type="text" asp-for="Language" class="form-control" placeholder="Enter Language" />
+            <span asp-validation-for="Language" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Genre</label>
+            <input type="text" asp-for="Genre" class="form-control" placeholder="Enter Genre" />
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Director</label>
+            <input type="text" asp-for="Director" class="form-control" placeholder="Enter Director" />
+            <span asp-validation-for="Director" class="text-danger"></span>
+        </div>
+
+        
+        
+        <div class="form-group">
+            <label>Rating</label>
+            <input type="text" asp-for="Rating" class="form-control" placeholder="Enter Rating" />
+            <span asp-validation-for="Rating" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Poster Image URL</label>
+            <input type="text" asp-for="PosterImageURL" class="form-control" placeholder="Enter Language" />
+            <span asp-validation-for="PosterImageURL" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Trailer URL</label>
+            <input type="text" asp-for="TrailerURL" class="form-control" placeholder="Enter Trailer URL" />
+            <span asp-validation-for="TrailerURL" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <input type="hidden" name="MovieID" value="@Model.MovieID" />
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-danger" asp-area="Admin" asp-controller="Movie" asp-action="MST_MovieList">Back</a>
+        </div>
+
+    </form> *@
+
+
+
+</main>
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#sample_1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#sample_2 tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        function fun1() {
+            if (confirm("Are you sure you want to delete?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

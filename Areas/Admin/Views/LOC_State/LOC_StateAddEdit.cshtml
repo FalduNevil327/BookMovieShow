@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "State Add/Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@model BookMovieShow.Areas.Admin.Model.LOC_StateModel
+
+<main id="main" class="main">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">State Add/Edit Page</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="LOC_State" asp-action="LOC_StateSave">
+                @Html.HiddenFor(x => x.StateID)
+
+                <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="Select State Name" asp-for="StateName">
+                </div>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="Select State Code" asp-for="StateCode">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+
+
+
+
+
+   
+</main>
+
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+﻿@model BookMovieShow.Areas.Admin.Model.CinemaWithMoviesModel
+
+@{
+    ViewData["Title"] = "Add Movies to Cinema";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main id="main" class="main">
+
+    <!---->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Cinema With Movies Add/Edit Page</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="CinemaWithMovies" asp-action="CinemaWithMovies_Save">
+                @Html.HiddenFor(x => x.ID)
+
+                <div class="col">
+
+                    <div class="row">
+                        <div class="row">
+                            <div class="row">
+                                <label><b>Cinema Name </b></label>
+                            </div>
+                            <div class="row">
+                                <select class="form-select" asp-for="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
+                                    <option>Select Cinema</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label><b>Movie Name </b></label>
+                            </div>
+                            <div class="row">
+                                <select class="form-control selectpicker" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList, "MovieID", "Title"))" multiple data-live-search="true">
+                                    <option>Select Movie</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+    <!---->
+</main>
+
+@section Scripts
+{
+    <script>
+        // Add any additional scripts if needed
+        $(document).ready(function () {
+            $(".chosen-select").chosen();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#multiple-checkboxes').multiselect();
+        });
+    </script>
+}

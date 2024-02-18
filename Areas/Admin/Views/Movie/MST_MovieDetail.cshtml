@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using System.Data;
+@model BookMovieShow.Areas.Admin.Model.MST_MovieModel
+
+<main id="main" class="main">
+
+    <div class="container-fluid">
+        <h4>Movie Detail Page of @Model.MovieID</h4>
+        <div class="card">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="containercontainer-fluid">
+                            <iframe width="100%" height="315" src=@Model.TrailerURL title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <img src=@Model.PosterImageURL class="card-img-top" alt="Movie Poster">
+                        </div>
+                        <div class="containercontainer-fluid" style="padding-top: 10px;">
+                            <h5 class="fw-bold text-start">@Model.Title</h5>
+                            <p class="text-start">@Model.Genre</p>
+                            <p class="text-start">@Model.Description</p>
+                            <p class="text-start">Duration: @Model.Duration mins</p>
+                            <p class="text-start">ReleaseDate: @Model.ReleaseDate</p>
+                            <p class="text-start">Language: @Model.Language</p>
+                            <p class="text-start">Director: @Model.Director</p>
+                            <p class="text-start">Rating: @Model.Rating</p>
+
+                        </div>
+                        <div class="container-fluid d-flex justify-content-between p-0">
+                            @* <a href="@Url.Action("MST_MovieAdd", "Admin", new { MovieID = Model.MovieID})" class="btn btn-primary">Edit</a>*@
+                            <a href="@Url.Action("MST_MovieAdd", "Movie", new { MovieID = Model.MovieID })" class="btn btn-success">Edit</a>
+                            <a class="btn btn-danger" asp-area="Admin" asp-controller="Movie" asp-action="MST_MovieList">Back</a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <!--End Movie List corousel-->
+        </div>
+    </div>
+</main>
+
+
+@*<div class="col">
+    <div class="containercontainer-fluid">
+        <img src="~/assets/img/Reco_movie-1.jpg" class="card-img-top" alt="...">
+    </div>
+    <div class="containercontainer-fluid" style="padding-top: 10px;">
+        <h5 class="fw-bold text-start">Salaar: Cease Fire - Part 1</h5>
+        <p class="text-start">Action / Thriller</p>
+    </div>
+    <div class="container-fluid d-flex justify-content-between p-0">
+        <button type="button" class="btn btn-primary" style="height: fit-content;align-self: center;">
+            edit Movie
+        </button>
+        <button type="button" class="btn btn-danger" style="height: fit-content;align-self: center;">
+            Delete Movie
+        </button>
+    </div>
+</div>*@

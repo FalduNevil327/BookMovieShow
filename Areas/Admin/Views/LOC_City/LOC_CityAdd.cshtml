@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "City Add/Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model BookMovieShow.Areas.Admin.Model.LOC_CityModel
+
+<main id="main" class="main">
+    
+    <!---->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">City Add/Edit Page</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin"  asp-controller="LOC_City" asp-action="LOC_CitySave">
+                @Html.HiddenFor(x => x.CityID)
+
+                <div class="col-md-12">
+                    <input type="text" class="form-control" placeholder="CityName" asp-for="CityName">
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="CityCode" asp-for="CityCode">
+                </div>
+                <div class="col-md-6">
+                    <select class="form-select" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+                        <option>Select State</option>
+                    </select>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+    <!---->
+    
+</main>
+
+@section Scripts {
+   @*  <script>
+        function fnOnStateChange() {
+            console.log("h");
+            var CountryID = $("#CountryID").val();
+            if (CountryID !== "") {
+                $("#StateID").empty();
+                $("#StateID").append($("<option></option>").val("").html("Select State"));
+                $.ajax(
+                    {
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "@Url.Action("StateDropDownByCountryID", "LOC_City")" + "?&CountryID=" + CountryID,
+                        data: {},
+                        dataType: "json",
+                        success: function (Result) {
+                            $.each(Result,
+                                function (key, value) {
+                                    $("#StateID").append($("<option></option>").val(value.stateID).html(value.stateName));
+                                });
+                        },
+                        error: function (r) {
+                            alert("Error while loading combobox.");
+                        }
+                    });
+            } else {
+                $("#StateID").empty();
+                $("#StateID").append($("<option></option>").val("").html("Select State"));
+            }
+        }
+    </script> *@
+
+}

@@ -1,0 +1,60 @@
+﻿@model BookMovieShow.Areas.Admin.Model.MST_CinemaModel
+
+@{
+    ViewData["Title"] = "Cinema Add/Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main id="main" class="main">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Cinema Add/Edit Page</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="Cinema" asp-action="MST_CinemaSave">
+                @Html.HiddenFor(x => x.CinemaID)
+
+                <div class="col-md-12">
+                    <label>Cinema Name</label>
+                    <input type="text" class="form-control" placeholder="Selet Cinema Name" asp-for="CinemaName">
+                </div>
+                
+                <div class="col-md-6">
+                    <label>State</label>
+                    <select class="form-select" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+                        <option>Select State</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>City</label>
+                    <select class="form-select" asp-for="CityID" asp-items="@(new SelectList(ViewBag.CityList,"CityID","CityName"))">
+                        <option>Select City</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <label>Capacity</label>
+                    <input type="text" class="form-control" placeholder="Enter Capacity" asp-for="Capacity">
+                </div>
+
+                <div class="col-md-12">
+                    <label>Screen Number</label>
+                    <input type="text" class="form-control" placeholder="Enter Screen number" asp-for="ScreenNumber">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Cinema" asp-action="MST_CinemaList">Back</a>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+</main>
+
+@section Scripts
+    {
+}
