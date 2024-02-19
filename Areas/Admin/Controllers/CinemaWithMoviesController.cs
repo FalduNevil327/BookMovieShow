@@ -155,7 +155,6 @@ namespace BookMovieShow.Areas.Admin.Controllers
 
         #endregion
 
-
         #region ExportSToExcel
         public IActionResult ExportSToExcel()
         {

@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Screen Add/Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model BookMovieShow.Areas.Admin.Model.ScreenModel
+
+<main class="main" id="main"> 
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Screen Add/Edit Page</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="Screen" asp-action="ScreenSave">
+                @Html.HiddenFor(x => x.ScreenID)
+
+                <div class="col-md-12">
+                    <label>Screen Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Screen Name" asp-for="ScreenName">
+                </div>
+
+                <div class="col-md-6">
+                    <label>Cinema</label>
+                    <select class="form-select" asp-for="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
+                        <option>Select Cinema</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Movie</label>
+                    <select class="form-select" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList,"MovieID","Title"))">
+                        <option>Select Movie</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <label>Capacity</label>
+                    <input type="text" class="form-control" placeholder="Enter Capacity" asp-for="Capacity">
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Cinema" asp-action="ScreenList">Back</a>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+
+</main>
