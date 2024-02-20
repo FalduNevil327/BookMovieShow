@@ -114,7 +114,7 @@ namespace BookMovieShow.DAL.ShowTime
                     model.ShowTime = (TimeOnly)dataRow["ShowTime"];
                     model.AvailableSeats = Convert.ToInt32(dataRow["AvailableSeats"]);
                     model.Price = Convert.ToInt32(dataRow["Price"]);
-                }   
+                }
                 return model;
             }
             catch (Exception ex)
