@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Screen List";
+}
+
+@model BookMovieShow.Areas.Admin.Model.ShowTimeModel
+
+<main class="main" id="main">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">ShowTime Add/Edit Page</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="ShowTime" asp-action="ShowTime_Save">
+                @Html.HiddenFor(x => x.ShowTimeID)
+
+                <div class="col-md-6">
+                    <label>Cinema</label>
+                    <select class="form-select" asp-for="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
+                        <option>Select Cinema</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Movie</label>
+                    <select class="form-select" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList,"MovieID","Title"))">
+                        <option>Select Movie</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Screens</label>
+                    <select class="form-select" asp-for="ScreenID" asp-items="@(new SelectList(ViewBag.ScreenList,"ScreenID","ScreenName"))">
+                        <option>Select Screen</option>
+                    </select>
+                </div>
+
+
+                <div class="col-md-12">
+                    <label>ShowTime</label>
+                    <input type="time" class="form-control" placeholder="HH : MM : SS" asp-for="ShowTime">
+                </div>
+
+                <div class="col-md-12">
+                    <label>Available Seats</label>
+                    <input type="number" class="form-control" placeholder="Enter Avaible Seats" asp-for="AvailableSeats">
+                </div>
+
+                <div class="col-md-12">
+                    <label>Price</label>
+                    <input type="number" class="form-control" placeholder="Enter Price" asp-for="Price">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Cinema" asp-action="ShowTime_List">Back</a>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+
+</main>

@@ -11,5 +11,11 @@
         public string? Title { get; set; } = string.Empty;
         
     }
+
+    public class Screens_DropDownModel
+    {
+        public int? ScreenID { get; set; }
+        public string? ScreenName { get; set; }
+    }
 }
 
