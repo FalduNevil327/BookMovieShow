@@ -5,6 +5,7 @@ using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Data;
+using DocumentFormat.OpenXml.EMMA;
 
 namespace BookMovieShow.Areas.Admin.Controllers
 {
@@ -21,11 +22,13 @@ namespace BookMovieShow.Areas.Admin.Controllers
         }
 
         #region SelectAll
-        public IActionResult ShowTime_List()
+        public IActionResult ShowTime_List(int CinemaID , int MovieID)
         {
             ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
             ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
             ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
+            ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+            ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID,MovieID);
             DataTable dt = sTDAL.PR_ShowTimes_SelectAll();
             return View(dt);
         }
@@ -49,7 +52,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
         #endregion
 
         #region Add ShowTime
-        public IActionResult ShowTime_Add(int ShowTimeID)
+        public IActionResult ShowTime_Add(int ShowTimeID,int CinemaID,int? MovieID)
         {
             ShowTimeModel showTimeModel = sTDAL.PR_ShowTimes_SelectByID(ShowTimeID);
 
@@ -59,6 +62,8 @@ namespace BookMovieShow.Areas.Admin.Controllers
                 ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
                 ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
                 ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
+                ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+                ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
                 return View("ShowTime_Add", showTimeModel);
             }
             else
@@ -67,6 +72,8 @@ namespace BookMovieShow.Areas.Admin.Controllers
                 ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
                 ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
                 ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
+                //ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+                //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
                 return View("ShowTime_Add");
             }
         }
@@ -130,7 +137,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
                         CinemaName = reader["CinemaName"].ToString(),
                         Title = reader["Title"].ToString(),
                         ScreenName = reader["ScreenName"].ToString(),
-                        //ShowTime = (TimeOnly?)reader["ShowTime"],
+                        ShowTime = Convert.ToDateTime(reader["ShowTime"]),
                         AvailableSeats = Convert.ToInt32(reader["AvailableSeats"]),
                         Price = Convert.ToInt32(reader["Price"]),
                     };
@@ -155,7 +162,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
                 worksheet.Cell(1, 2).Value = "CinemaName";
                 worksheet.Cell(1, 3).Value = "MovieName";
                 worksheet.Cell(1, 4).Value = "ScreenName";
-                //worksheet.Cell(1, 5).Value = "ShowTime";
+                worksheet.Cell(1, 5).Value = "ShowTime";
                 worksheet.Cell(1, 5).Value = "AvailableSeats";
                 worksheet.Cell(1, 5).Value = "Price";
                 // Add data
@@ -166,7 +173,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
                     worksheet.Cell(row, 2).Value = model.CinemaName;
                     worksheet.Cell(row, 3).Value = model.Title;
                     worksheet.Cell(row, 4).Value = model.ScreenName;
-                    //worksheet.Cell(row, 5).Value = model.ShowTime;
+                    worksheet.Cell(row, 5).Value = model.ShowTime;
                     worksheet.Cell(row, 5).Value = model.AvailableSeats;
                     worksheet.Cell(row, 5).Value = model.Price;
                     // Add other properties...
@@ -185,5 +192,18 @@ namespace BookMovieShow.Areas.Admin.Controllers
         }
 
         #endregion
+
+        public IActionResult MovieDropDownByCinemaID(int CinemaID)
+        {
+            return ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+            
+        }
+
+        public IActionResult ScreenDropDownByCinemaIDAndMovieID(int MovieID,int CinemaID)
+        {
+            return ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
+
+        }
+
     }
 }

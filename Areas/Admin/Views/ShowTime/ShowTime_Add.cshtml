@@ -15,21 +15,35 @@
             <form class="row g-3" method="post" asp-area="Admin" asp-controller="ShowTime" asp-action="ShowTime_Save">
                 @Html.HiddenFor(x => x.ShowTimeID)
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label>Cinema</label>
-                    <select class="form-select" asp-for="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
+                    <select class="form-select"asp-for="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
                         <option>Select Cinema</option>
                     </select>
                 </div>
 
-                <div class="col-md-6">
+                @* <div class="col-md-6">
+                    <label>Cinema</label>
+                    <select class="form-select" onchange="fnOnCinemaChange();" asp-for="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
+                        <option>Select Cinema</option>
+                    </select>
+                </div> *@
+
+                <div class="col-md-12">
                     <label>Movie</label>
-                    <select class="form-select" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList,"MovieID","Title"))">
+                    <select class="form-select"asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList,"MovieID","Title"))">
                         <option>Select Movie</option>
                     </select>
                 </div>
 
-                <div class="col-md-6">
+                @* <div class="col-md-12">
+                    <label>Movie</label>
+                    <select class="form-select" onchange="fnOnMovieChange();" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList,"MovieID","Title"))">
+                        <option>Select Movie</option>
+                    </select>
+                </div> *@
+
+                <div class="col-md-12">
                     <label>Screens</label>
                     <select class="form-select" asp-for="ScreenID" asp-items="@(new SelectList(ViewBag.ScreenList,"ScreenID","ScreenName"))">
                         <option>Select Screen</option>
@@ -64,3 +78,65 @@
     </div>
 
 </main>
+
+@section Scripts{
+    <script>
+        function fnOnCinemaChange() {
+            var cinemaID = $("#CinemaID").val();
+            if (cinemaID !== "") {
+                $("#MovieID").empty();
+                $("#MovieID").append($("<option></option>").val("").html("Select Movie"));
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("MovieDropDownByCinemaID", "ShowTime")" + "?cinemaID=" + cinemaID,
+                    data: {},
+                    dataType: "json",
+                    success: function (result) {
+                        $.each(result,
+                            function (key, value) {
+                                $("#MovieID").append($("<option></option>").val(value.MovieID).html(value.MovieName));
+                            });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("Error while loading movies.");
+                    }
+                });
+            } else {
+                $("#MovieID").empty();
+                $("#MovieID").append($("<option></option>").val("").html("Select Movie"));
+            }
+        }
+
+        function fnOnMovieChange() {
+            var cinemaID = $("#CinemaID").val();
+            var movieID = $("#MovieID").val();
+            if (cinemaID !== "" && movieID !== "") {
+                $("#ScreenID").empty();
+                $("#ScreenID").append($("<option></option>").val("").html("Select Screen"));
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("ScreenDropDownByCinemaIDAndMovieID", "YourControllerName")" + "?cinemaID=" + cinemaID + "&movieID=" + movieID,
+                    data: {},
+                    dataType: "json",
+                    success: function (result) {
+                        $.each(result,
+                            function (key, value) {
+                                $("#ScreenID").append($("<option></option>").val(value.ScreenID).html(value.ScreenName));
+                            });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("Error while loading screens.");
+                    }
+                });
+            } else {
+                $("#ScreenID").empty();
+                $("#ScreenID").append($("<option></option>").val("").html("Select Screen"));
+            }
+        }
+    </script>
+
+}

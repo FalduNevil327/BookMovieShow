@@ -7,10 +7,10 @@
         public string? Title { get; set; }
         public int? CinemaID { get; set; }
         public string? CinemaName { get; set; }
-        public int ScreenID { get; set; }
+        public int? ScreenID { get; set; }
         public String? ScreenName {  get; set; }
         public int? AvailableSeats { get; set; }
         public decimal? Price { get; set; }
-        public TimeOnly? ShowTime { get; set; }
+        public DateTime? ShowTime { get; set; }
     }
 }

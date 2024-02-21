@@ -40,7 +40,7 @@ namespace BookMovieShow.DAL.ShowTime
                     sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, showTimeModel.MovieID);
                     sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, showTimeModel.CinemaID);
                     sqlDatabase.AddInParameter(dbCommand, "@ScreenID", DbType.Int32, showTimeModel.ScreenID);
-                    sqlDatabase.AddInParameter(dbCommand, "@ShowTime", DbType.Time, showTimeModel.ShowTime);
+                    sqlDatabase.AddInParameter(dbCommand, "@ShowTime", DbType.DateTime, showTimeModel.ShowTime);
                     sqlDatabase.AddInParameter(dbCommand, "@AvailableSeats", DbType.Int32, showTimeModel.AvailableSeats);
                     sqlDatabase.AddInParameter(dbCommand, "@Price", DbType.Decimal, showTimeModel.Price);
 
@@ -56,7 +56,7 @@ namespace BookMovieShow.DAL.ShowTime
                     sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, showTimeModel.MovieID);
                     sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, showTimeModel.CinemaID);
                     sqlDatabase.AddInParameter(dbCommand, "@ScreenID", DbType.Int32, showTimeModel.ScreenID);
-                    sqlDatabase.AddInParameter(dbCommand, "@ShowTime", DbType.Time, showTimeModel.ShowTime);
+                    sqlDatabase.AddInParameter(dbCommand, "@ShowTime", DbType.DateTime, showTimeModel.ShowTime);
                     sqlDatabase.AddInParameter(dbCommand, "@AvailableSeats", DbType.Int32, showTimeModel.AvailableSeats);
                     sqlDatabase.AddInParameter(dbCommand, "@Price", DbType.Decimal, showTimeModel.Price);
                     Console.WriteLine("SuccessDALUpdate");
@@ -111,7 +111,7 @@ namespace BookMovieShow.DAL.ShowTime
                     model.MovieID = Convert.ToInt32(dataRow["MovieID"]);
                     model.CinemaID = Convert.ToInt32(dataRow["CinemaID"]);
                     model.ScreenID = Convert.ToInt32(dataRow["ScreenID"]);
-                    model.ShowTime = (TimeOnly)dataRow["ShowTime"];
+                    model.ShowTime = Convert.ToDateTime(dataRow["ShowTime"]).ToUniversalTime();
                     model.AvailableSeats = Convert.ToInt32(dataRow["AvailableSeats"]);
                     model.Price = Convert.ToInt32(dataRow["Price"]);
                 }

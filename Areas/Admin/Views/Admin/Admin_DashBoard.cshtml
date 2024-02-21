@@ -1,8 +1,218 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Home Page";
 }
 
-<main class="main" id="main">
+@using BookMovieShow.Models;
+@using System.Data;
+@model DataTable;
+
+
+@* <main class="main" id="main">
     <a class="" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-left"></i></a>
     <h1>Admin DashBoard</h1>
+</main> *@
+
+<main id="main" class="main">
+
+    <!--Heading-->
+    <div class="pagetitle">
+        <a class="" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-arrow-left"></i></a>
+        <h3 class="title">Admin Dashboard</h3>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <!--Heading-->
+    <!--Start DashBoard-->
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+
+                    <!-- User -->
+                    <div class="col-xxl-4 col-md-12">
+                        <div class="card info-card sales-card">
+                            <a asp-area="Admin" asp-controller="SEC_User" asp-action="SEC_UserList">
+                                <div class="card-body">
+                                    <h5 class="card-title">User</h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h5 class="mb-0">@Model.Rows[0]["UserCount"]</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Cinema -->
+                    <!-- Cinema -->
+                    <div class="col-xxl-4 col-md-3">
+                        <div class="card info-card sales-card">
+                            <a asp-area="Admin" asp-controller="Cinema" asp-action="MST_CinemaList">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cinema</h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-house-door"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h5 class="mb-0">@Model.Rows[0]["CinemaCount"]</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Cinema -->
+                    <!-- Movie -->
+                    <div class="col-xxl-4 col-md-3">
+                        <div class="card info-card sales-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Movie</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-camera-reels"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h5 class="mb-0">@Model.Rows[0]["MovieCount"]</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End Movie -->
+                    <!-- State -->
+                    <div class="col-xxl-4 col-md-3">
+                        <div class="card info-card sales-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">State</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-geo"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h5 class="mb-0">@Model.Rows[0]["StateCount"]</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End State -->
+                    <!-- City -->
+                    <div class="col-xxl-4 col-md-3">
+                        <div class="card info-card sales-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">City</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-compass"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h5 class="mb-0">@Model.Rows[0]["CityCount"]</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End City -->
+                    <!-- Reports -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Reports></h5>
+
+                                <!-- Line Chart -->
+                                <div id="reportsChart"></div>
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        new ApexCharts(document.querySelector("#reportsChart"), {
+                                            series: [{
+                                                name: 'Cinema',
+                                                data: [31, 40, 28, 51, 42, 82, 56],
+                                            }, {
+                                                name: 'Movie',
+                                                data: [11, 32, 45, 32, 34, 52, 41]
+                                            }, {
+                                                name: 'User',
+                                                data: [15, 11, 32, 18, 9, 24, 11]
+                                            }],
+                                            chart: {
+                                                height: 350,
+                                                type: 'area',
+                                                toolbar: {
+                                                    show: false
+                                                },
+                                            },
+                                            markers: {
+                                                size: 4
+                                            },
+                                            colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                            fill: {
+                                                type: "gradient",
+                                                gradient: {
+                                                    shadeIntensity: 1,
+                                                    opacityFrom: 0.3,
+                                                    opacityTo: 0.4,
+                                                    stops: [0, 90, 100]
+                                                }
+                                            },
+                                            dataLabels: {
+                                                enabled: false
+                                            },
+                                            stroke: {
+                                                curve: 'smooth',
+                                                width: 2
+                                            },
+                                            xaxis: {
+                                                type: 'datetime',
+                                                categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                                            },
+                                            tooltip: {
+                                                x: {
+                                                    format: 'dd/MM/yy HH:mm'
+                                                },
+                                            }
+                                        }).render();
+                                    });
+                                </script>
+                                <!-- End Line Chart -->
+
+                            </div>
+
+                        </div>
+                    </div><!-- End Reports -->
+
+
+                </div>
+            </div><!-- End Left side columns -->
+
+
+
+        </div>
+    </section>
+
+    <!--Start DashBoard-->
+
 </main>
+<!-- End #main -->
