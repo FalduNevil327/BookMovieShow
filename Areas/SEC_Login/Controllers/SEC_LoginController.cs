@@ -26,6 +26,11 @@ namespace BookMovieShow.Areas.SEC_Login.Controllers
             return View();
         }
 
+        public IActionResult SEC_UserSignUp()
+        {
+            return View();
+        }
+
         #region Login
         [HttpPost]
         public IActionResult Login(SEC_LoginModel modelSEC_User)
@@ -91,7 +96,61 @@ namespace BookMovieShow.Areas.SEC_Login.Controllers
 
         #endregion
 
-        
+        #region Register
+        public IActionResult Register(SEC_LoginModel modelSEC_User)
+        {
+
+            if (modelSEC_User.UserName == null)
+            {
+                TempData["UserNameError"] = "User Name is Required!";
+            }
+            if (modelSEC_User.Password == null)
+            {
+                TempData["PasswordError"] = "Password is Required!";
+            }
+            if (modelSEC_User.FullName == null)
+            {
+                TempData["FullNameError"] = "Full  Name is Required!";
+            }
+            if (modelSEC_User.PhoneNumber == null)
+            {
+                TempData["PhoneNumberError"] = "Phone Number Name is Required!";
+            }
+            if (modelSEC_User.Email == null)
+            {
+                TempData["EmailError"] = "Email Address is Required!";
+            }
+
+            if (TempData["UserNameError"] != null || TempData["PasswordError"] != null || TempData["FullNameError"] != null || TempData["PhoneNumberError"] != null || TempData["EmailError"] != null)
+            {
+                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User.UserName, modelSEC_User.Password, modelSEC_User.FullName, modelSEC_User.PhoneNumber, modelSEC_User.Email,modelSEC_User.Address);
+                if (IsSuccess)
+                {
+                    return RedirectToAction("SEC_LoginPage");
+                }
+                else
+                {
+                    return RedirectToAction("SEC_UserSignUp");
+                }
+            }
+
+            else
+            {
+                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User.UserName, modelSEC_User.Password, modelSEC_User.FullName, modelSEC_User.PhoneNumber,modelSEC_User.Email,modelSEC_User.Address);
+                if (IsSuccess)
+                {
+                    return RedirectToAction("SEC_LoginPage");
+                }
+                else
+                {
+                    return RedirectToAction("SEC_UserSignUp");
+                }
+            }
+            
+        }
+        #endregion
+
+
 
     }
 }

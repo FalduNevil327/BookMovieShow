@@ -25,10 +25,10 @@ namespace BookMovieShow.Areas.Admin.Controllers
         public IActionResult ShowTime_List(int CinemaID , int MovieID)
         {
             ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
-            ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
-            ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
+            //ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
+            //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
             ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
-            ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID,MovieID);
+            ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
             DataTable dt = sTDAL.PR_ShowTimes_SelectAll();
             return View(dt);
         }
@@ -60,8 +60,8 @@ namespace BookMovieShow.Areas.Admin.Controllers
             {
                 TempData["PageTitle"] = "ShowTime Edit Page";
                 ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
-                ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
-                ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
+                //ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
+                //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
                 ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
                 ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
                 return View("ShowTime_Add", showTimeModel);
@@ -70,10 +70,10 @@ namespace BookMovieShow.Areas.Admin.Controllers
             {
                 TempData["PageTitle"] = "ShowTime Edit Page";
                 ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
-                ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
-                ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
-                //ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
-                //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
+                //ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
+                //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
+                ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+                ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
                 return View("ShowTime_Add");
             }
         }
