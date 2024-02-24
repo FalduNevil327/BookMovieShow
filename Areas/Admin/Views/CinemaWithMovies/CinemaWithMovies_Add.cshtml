@@ -1,9 +1,9 @@
-﻿@model BookMovieShow.Areas.Admin.Model.CinemaWithMoviesModel
-
+﻿
 @{
     ViewData["Title"] = "Add Movies to Cinema";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+@model BookMovieShow.Areas.Admin.Model.CinemaWithMoviesModel
 
 <main id="main" class="main">
 
@@ -38,9 +38,15 @@
                             <div class="row">
                                 <label><b>Movie Name </b></label>
                             </div>
-                            <div class="row">
+                            @* <div class="row">
                                 <select class="form-control selectpicker" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList, "MovieID", "Title"))" multiple data-live-search="true">
                                     <option>Select Movie</option>
+                                </select>
+                            </div> *@
+
+                            <div class="row">
+                                <select class="form-select" multiple="" aria-label="multiple select example" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList, "MovieID", "Title"))">
+                                    <option value="">Select Movie</option>
                                 </select>
                             </div>
 

@@ -8,6 +8,7 @@
         public int? CinemaID { get; set; }
         public string? CinemaName { get; set; }
 
+
     }
 
     public class CinemaWithMovies_FilterModel

@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Data;
 using DocumentFormat.OpenXml.EMMA;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using System.Data.Common;
 
 namespace BookMovieShow.Areas.Admin.Controllers
 {
@@ -193,17 +196,85 @@ namespace BookMovieShow.Areas.Admin.Controllers
 
         #endregion
 
+        #region PR_Movies_ComboBoxbyCinemaID
+        public List<MST_MoviesDropDownModel> PR_Movies_ComboBoxbyCinemaID(int CinemaID)
+        {
+            try
+            {
+                //string ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("ConnectionString");
+                string ConnectionString = this.Configuration.GetConnectionString("ConnectionString");
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Movies_ComboBoxbyCinemaID");
+                sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, CinemaID);
+                DataTable dataTable = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                List<MST_MoviesDropDownModel> listOfMovie = new List<MST_MoviesDropDownModel>();
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    MST_MoviesDropDownModel model = new MST_MoviesDropDownModel();
+                    model.MovieID = Convert.ToInt32(dataRow["MovieID"]);
+                    model.Title = dataRow["Title"].ToString();
+                    listOfMovie.Add(model);
+                }
+                return listOfMovie;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region PR_Screens_ComboBoxbyCinemaIDAndMovieID
+        public List<Screens_DropDownModel> PR_Screens_ComboBoxbyCinemaIDAndMovieID(int? CinemaID, int? MovieID)
+        {
+            try
+            {
+                string ConnectionString = this.Configuration.GetConnectionString("ConnectionString");
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Screens_ComboBoxbyCinemaIDAndMovieID");
+                sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, CinemaID);
+                sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, MovieID);
+                DataTable dataTable = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                List<Screens_DropDownModel> listOfScreens = new List<Screens_DropDownModel>();
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    Screens_DropDownModel model = new Screens_DropDownModel();
+                    model.ScreenID = Convert.ToInt32(dataRow["ScreenID"]);
+                    model.ScreenName = dataRow["ScreenName"].ToString();
+                    listOfScreens.Add(model);
+                }
+                return listOfScreens;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         public IActionResult MovieDropDownByCinemaID(int CinemaID)
         {
-            return ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
-            
+            var model = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+            return Json(model);
+
         }
 
-        public IActionResult ScreenDropDownByCinemaIDAndMovieID(int MovieID,int CinemaID)
+        public IActionResult ScreenDropDownByCinemaIDAndMovieID(int MovieID, int CinemaID)
         {
-            return ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
+            var model = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID,MovieID);
+            return Json(model);
 
         }
+
 
     }
 }

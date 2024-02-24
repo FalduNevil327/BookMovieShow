@@ -3,186 +3,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>User_Dashboard - BookMovieShow</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <link rel="stylesheet" href="~/assets2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets2/css/all.min.css">
+    <link rel="stylesheet" href="~/assets2/css/animate.css">
+    <link rel="stylesheet" href="~/assets2/css/flaticon.css">
+    <link rel="stylesheet" href="~/assets2/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets2/css/odometer.css">
+    <link rel="stylesheet" href="~/assets2/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets2/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets2/css/nice-select.css">
+    <link rel="stylesheet" href="~/assets2/css/jquery.animatedheadline.css">
+    <link rel="stylesheet" href="~/assets2/css/main.css">
 
-    <!-- Favicons -->
-    <link href="~/assets/img/favicon.png" rel="icon">
-    <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="shortcut icon" href="~/assets2/images/favicon.png" type="image/x-icon">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <title>BookMovieShow  - DashBoard</title>
 
-    <!-- Vendor CSS Files -->
-    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="~/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="~/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="~/assets/css/style.css" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: NiceAdmin
-    * Updated: Aug 30 2023 with Bootstrap v5.3.1
-    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body>
 
-
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-                <img src="~/assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">BookMovieShow</span>
-            </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
-
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
+    <!-- ==========Preloader========== -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Preloader========== -->
+    <!-- ==========Overlay========== -->
+    <div class="overlay"></div>
+    <a href="#0" class="scrollToTop">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- ==========Overlay========== -->
+    <!-- ==========Header-Section========== -->
+    <header class="header-section">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="~/assets2/images/logo/logo12.png" alt="logo">
                     </a>
-                </li><!-- End Search Icon-->
-                @*<li class="nav-item dropdown pe-3">
-                <div class="col-3">
-                <select class ="form-control" style="border:none;">
-                <option> City</option>
-                <option>Rajkot</option>
-                <option>Morbi</option>
-                <option>Surat</option>
-                <option>Ahmedabad</option>
-                <option>Vadodara</option>
-                </select>
                 </div>
-                </li><!--City DropDown-->*@
+                <ul class="menu">
+                    <li>
+                        <a asp-area="User" asp-controller="User" asp-action="User_DashBoard" class="active">Home</a>
+                    </li>
+                    <li>
+                        <a href="#0">movies</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="movie-grid.html">Movie Grid</a>
+                            </li>
+                            <li>
+                                <a href="movie-list.html">Movie List</a>
+                            </li>
+                            <li>
+                                <a href="movie-details.html">Movie Details</a>
+                            </li>
+                           @*  <li>
+                                <a href="movie-details-2.html">Movie Details 2</a>
+                            </li>
+                            <li>
+                                <a href="movie-ticket-plan.html">Movie Ticket Plan</a>
+                            </li>
+                            <li>
+                                <a href="movie-seat-plan.html">Movie Seat Plan</a>
+                            </li>
+                            <li>
+                                <a href="movie-checkout.html">Movie Checkout</a>
+                            </li>
+                            <li>
+                                <a href="popcorn.html">Movie Food</a>
+                            </li> *@
+                        </ul>
+                    </li>
+                    @* <li>
+                        <a href="#0">events</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="events.html">Events</a>
+                            </li>
+                            <li>
+                                <a href="event-details.html">Event Details</a>
+                            </li>
+                            <li>
+                                <a href="event-speaker.html">Event Speaker</a>
+                            </li>
+                            <li>
+                                <a href="event-ticket.html">Event Ticket</a>
+                            </li>
+                            <li>
+                                <a href="event-checkout.html">Event Checkout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#0">sports</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="sports.html">Sports</a>
+                            </li>
+                            <li>
+                                <a href="sport-details.html">Sport Details</a>
+                            </li>
+                            <li>
+                                <a href="sports-ticket.html">Sport Ticket</a>
+                            </li>
+                            <li>
+                                <a href="sports-checkout.html">Sport Checkout</a>
+                            </li>
+                        </ul>
+                    </li> *@
+                    <li>
+                        <a href="#0">pages</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="about.html">About Us</a>
+                            </li>
+                            <li>
+                                <a href="apps-download.html">Apps Download</a>
+                            </li>
+                            <li>
+                                <a asp-area="SEC_Login" asp-controller="SEC_Login" asp-action="SEC_LoginPage">Sign In</a>
+                            </li>
+                            <li>
+                                <a asp-area="SEC_Login" asp-controller="SEC_Login" asp-action="SEC_UserSignUp">Sign Up</a>
+                            </li>
+                            @* <li>
+                                <a href="404.html">404</a>
+                            </li> *@
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#0">blog</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="blog.html">Blog</a>
+                            </li>
+                            <li>
+                                <a href="blog-details.html">Blog Single</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="contact.html">contact</a>
+                    </li>
+                    <li class="header-button pr-0">
+                        <a asp-area="SEC_Login" asp-controller="SEC_Login" asp-action="SEC_LoginPage">join us</a>
+                    </li>
 
-                <li>
-                    <a type="button" asp-area="SEC_Login" asp-controller="SEC_Login" asp-action="SEC_LoginPage" class="btn btn-light" style="margin-right:10px;">Sign In</a>
-                </li><!--SignIn Button -->
+                    <li>
+                        <a>Welcome, @CV.UserName()</a>
+                        <ul class="submenu">
+                            <li class="dropdown-header">
+                                <h6>@CV.UserName()</h6>
+                                @* <h3>@CV.Email</h3> *@
+                            </li>
 
-                <li class="nav-item dropdown pe-3">
+                            <li>
+                                <a href="about.html">My Profile</a>
+                            </li>
+                            <li>
+                                <a href="apps-download.html">Account Setting</a>
+                            </li>
+                            <li>
+                                <a >Neeed Help?</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Index">Log Out</a>
+                            </li>
+                            @* <li>
+                            <a href="404.html">404</a>
+                            </li> *@
+                        </ul>
+                    </li>
 
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        @*<img src="~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">*@
-                        <span class="d-none d-md-block dropdown-toggle ps-2">@CV.UserName()</span>
-                    </a><!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>@CV.UserName()</h6>
-                            <span>Web Designer</span>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Account Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" asp-controller="Home" asp-action="Index">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
-                            </a>
-                        </li>
-
-                    </ul><!-- End Profile Dropdown Items -->
-                </li><!-- End Profile Nav -->
-
-            </ul>
-        </nav><!-- End Icons Navigation -->
-
+                </ul>
+                <div class="header-bar d-lg-none">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
     </header>
-    <!-- End Header -->
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
-
-        <ul class="sidebar-nav" id="sidebar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link " asp-area="User" asp-controller="User" asp-action="User_DashBoard">
-                    <i class="bi bi-house-door-fill"></i>
-                    <span>Home</span>
-                </a>
-            </li><!-- End Home Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link " asp-area="User" asp-controller="User" asp-action="">
-                    <i class="bi bi-person"></i>
-                    <span>Profile List</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-
-            @*<li class="nav-item">
-                <a class="nav-link " asp-area="Admin" asp-controller="Admin" asp-action="Temp_Details">
-                    <i class="bi bi-grid"></i>
-                    <span>Movie Details</span>
-                </a>
-            </li><!-- End Movie Detail Nav -->*@
-
-
-            <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="" asp-action="">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Login</span>
-                </a>
-            </li><!-- End Login Page Nav -->
-
-        </ul>
-
-    </aside><!-- End Sidebar-->
+    <!-- ==========Header-Section========== -->
 
     <div class="container-fluid">
         <main role="main" class="pb-3">
@@ -193,38 +207,99 @@
     </div>
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    <footer class="footer-section">
+        <div class="newslater-section padding-bottom">
+            <div class="container">
+                <div class="newslater-container bg_img" data-background="~/assets2/images/newslater/newslater-bg01.jpg">
+                    <div class="newslater-wrapper">
+                        <h5 class="cate">subscribe to Boleto </h5>
+                        <h3 class="title">to get exclusive benifits</h3>
+                        <form class="newslater-form">
+                            <input type="text" placeholder="Your Email Address">
+                            <button type="submit">subscribe</button>
+                        </form>
+                        <p>We respect your privacy, so we never share your info</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        <div class="container">
+            <div class="footer-top">
+                <div class="logo">
+                    <a href="index-1.html">
+                        <img src="~/assets2/images/footer/footer-logo.png" alt="footer">
+                    </a>
+                </div>
+                <ul class="social-icons">
+                    <li>
+                        <a href="#0">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0" class="active">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#0">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-area">
+                    <div class="left">
+                        <p>Copyright © 2020.All Rights Reserved By <a href="#0">Boleto </a></p>
+                    </div>
+                    <ul class="links">
+                        <li>
+                            <a href="#0">About</a>
+                        </li>
+                        <li>
+                            <a href="#0">Terms Of Use</a>
+                        </li>
+                        <li>
+                            <a href="#0">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="#0">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="#0">Feedback</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </footer>
     <!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
-    <script src="~/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="~/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="~/assets/vendor/quill/quill.min.js"></script>
-    <script src="~/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="~/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="~/assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="~/assets/js/main.js"></script>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+    <script src="~/assets2/js/jquery-3.3.1.min.js"></script>
+    <script src="~/assets2/js/modernizr-3.6.0.min.js"></script>
+    <script src="~/assets2/js/plugins.js"></script>
+    <script src="~/assets2/js/bootstrap.min.js"></script>
+    <script src="~/assets2/js/heandline.js"></script>
+    <script src="~/assets2/js/isotope.pkgd.min.js"></script>
+    <script src="~/assets2/js/magnific-popup.min.js"></script>
+    <script src="~/assets2/js/owl.carousel.min.js"></script>
+    <script src="~/assets2/js/wow.min.js"></script>
+    <script src="~/assets2/js/countdown.min.js"></script>
+    <script src="~/assets2/js/odometer.min.js"></script>
+    <script src="~/assets2/js/viewport.jquery.js"></script>
+    <script src="~/assets2/js/nice-select.js"></script>
+    <script src="~/assets2/js/main.js"></script>
 
 
 
@@ -233,3 +308,4 @@
     @RenderSection("scripts", required: false);
 </body>
 </html>
+

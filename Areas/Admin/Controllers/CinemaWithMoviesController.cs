@@ -53,6 +53,8 @@ namespace BookMovieShow.Areas.Admin.Controllers
                     return RedirectToAction("CinemaWithMovies_List");
                 }
 
+
+
             }
             TempData["Msg"] = "Record Updated Successfully";
             return View("CinemaWithMovies_Add");
