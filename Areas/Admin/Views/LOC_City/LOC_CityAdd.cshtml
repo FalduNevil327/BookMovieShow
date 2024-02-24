@@ -18,14 +18,17 @@
 
                 <div class="col-md-12">
                     <input type="text" class="form-control" placeholder="CityName" asp-for="CityName">
+                    <span asp-validation-for="CityName" class="text-danger"></span>
                 </div>
                 <div class="col-md-6">
                     <input type="text" class="form-control" placeholder="CityCode" asp-for="CityCode">
+                    <span asp-validation-for="CityCode" class="text-danger"></span>
                 </div>
                 <div class="col-md-6">
                     <select class="form-select" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
                         <option>Select State</option>
                     </select>
+                    <span asp-validation-for="StateID" class="text-danger"></span>
                 </div>
 
                 <div class="text-center">

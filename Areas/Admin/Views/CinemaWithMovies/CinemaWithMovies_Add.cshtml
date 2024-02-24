@@ -1,9 +1,9 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Add Movies to Cinema";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 @model BookMovieShow.Areas.Admin.Model.CinemaWithMoviesModel
+
 
 <main id="main" class="main">
 
@@ -27,6 +27,7 @@
                                 <select class="form-select" asp-for="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
                                     <option>Select Cinema</option>
                                 </select>
+                                <span asp-validation-for="CinemaID" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -39,17 +40,36 @@
                                 <label><b>Movie Name </b></label>
                             </div>
                             @* <div class="row">
-                                <select class="form-control selectpicker" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList, "MovieID", "Title"))" multiple data-live-search="true">
-                                    <option>Select Movie</option>
-                                </select>
+                            <select class="form-control selectpicker" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList, "MovieID", "Title"))" multiple data-live-search="true">
+                            <option>Select Movie</option>
+                            </select>
                             </div> *@
 
                             <div class="row">
                                 <select class="form-select" multiple="" aria-label="multiple select example" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList, "MovieID", "Title"))">
                                     <option value="">Select Movie</option>
+                                    @* <option value=""><div><input class="checkbox1"  type="checkbox"/></div></option> *@
                                 </select>
+                                <span asp-validation-for="MovieID" class="text-danger"></span>
                             </div>
 
+                            @* <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle"
+                                        type="button"
+                                        id="multiSelectDropdown"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                    Select
+                                </button>
+                                <ul class="dropdown-menu"
+                                    aria-labelledby="multiSelectDropdown">
+                                    <li>
+                                        <select class="form-select" multiple="" aria-label="multiple select example" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList, "MovieID", "Title"))">
+                                            <option value="">Select Movie</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </div> *@
                         </div>
 
                     </div>
@@ -72,8 +92,37 @@
 
 @section Scripts
 {
+
     <script>
-        // Add any additional scripts if needed
+        const chBoxes =
+            document.querySelectorAll('.dropdown-menu input[type="checkbox"]');
+        const dpBtn =
+            document.getElementById('multiSelectDropdown');
+        let mySelectedListItems = [];
+
+        function handleCB() {
+            mySelectedListItems = [];
+            let mySelectedListItemsText = '';
+
+            chBoxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    mySelectedListItems.push(checkbox.value);
+                    mySelectedListItemsText += checkbox.value + ', ';
+                }
+            });
+
+            dpBtn.innerText =
+                mySelectedListItems.length > 0
+                    ? mySelectedListItemsText.slice(0, -2) : 'Select';
+        }
+
+        chBoxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', handleCB);
+        });
+    </script>
+
+
+    <script>
         $(document).ready(function () {
             $(".chosen-select").chosen();
         });
@@ -84,4 +133,6 @@
             $('#multiple-checkboxes').multiselect();
         });
     </script>
+
+
 }

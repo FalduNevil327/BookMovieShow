@@ -18,6 +18,7 @@
                 <div class="col-md-12">
                     <label>Cinema Name</label>
                     <input type="text" class="form-control" placeholder="Selet Cinema Name" asp-for="CinemaName">
+                    <span asp-validation-for="CinemaName" class="text-danger"></span>
                 </div>
                 
                 <div class="col-md-6">
@@ -25,6 +26,7 @@
                     <select class="form-select" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
                         <option>Select State</option>
                     </select>
+                    <span asp-validation-for="StateID" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-6">
@@ -32,15 +34,18 @@
                     <select class="form-select" asp-for="CityID" asp-items="@(new SelectList(ViewBag.CityList,"CityID","CityName"))">
                         <option>Select City</option>
                     </select>
+                    <span asp-validation-for="CityID" class="text-danger"></span>
                 </div>
                 <div class="col-md-12">
                     <label>Capacity</label>
                     <input type="text" class="form-control" placeholder="Enter Capacity" asp-for="Capacity">
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-12">
                     <label>Screen Number</label>
                     <input type="text" class="form-control" placeholder="Enter Screen number" asp-for="ScreenNumber">
+                    <span asp-validation-for="ScreenNumber" class="text-danger"></span>
                 </div>
 
                 <div class="text-center">

@@ -5,9 +5,9 @@ namespace BookMovieShow.Areas.Admin.Model
     public class LOC_StateModel
     {   
         public int? StateID { get; set;}
-        
+        [Required]
         public string? StateName { get; set;}
-       
+        [Required]
         public string? StateCode { get; set; }
         
     }

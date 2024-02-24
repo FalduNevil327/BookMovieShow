@@ -9,7 +9,9 @@ namespace BookMovieShow.Areas.Admin.Model
         public string? CityName { get; set; }
         [Required]
         public string? CityCode { get; set; }
+        [Required]
         public int? StateID { get; set; }
+        [Required]
         public string? StateName { get; set; }
 
     }

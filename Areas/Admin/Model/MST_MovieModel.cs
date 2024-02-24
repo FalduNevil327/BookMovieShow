@@ -9,12 +9,19 @@ namespace BookMovieShow.Areas.Admin.Model
         public string? Title { get; set; }
         [Required]
         public string? Description { get; set; }
+        [Required]
         public string? Duration { get; set; }
+        [Required]
         public DateTime? ReleaseDate { get; set; }
+        [Required]
         public string? Language { get; set; }
+        [Required]
        public string? Director { get; set; }
+        [Required]
         public string? Genre { get; set; }
+        [Required]
         public Decimal? Rating { get; set; }
+
         
         public string? PosterImageURL { get; set; }
        

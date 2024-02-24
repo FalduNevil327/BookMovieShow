@@ -11,9 +11,10 @@ namespace BookMovieShow.Areas.Admin.Model
         [Required]
         public string? CinemaName { get; set; }
 
-
+        [Required]
         public int? StateID { get; set; }
         public string? StateName { get; set; } = string.Empty;
+        [Required]
         public int? CityID { get; set; }
         public string? CityName { get; set; } = string.Empty;
 

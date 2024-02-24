@@ -27,6 +27,7 @@
                     <select class="form-select" id="CinemaID" onchange="fnOnCinemaChange();" asp-for="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
                         <option>Select Cinema</option>
                     </select>
+                    <span asp-validation-for="CinemaID" class="text-danger"></span>
                 </div>
 
                 @* <div class="col-md-12">
@@ -41,6 +42,7 @@
                     <select class="form-select" id="MovieID" onchange="fnOnMovieChange();" asp-for="MovieID" asp-items="@(new SelectList(ViewBag.MovieList,"MovieID","Title"))">
                         <option>Select Movie</option>
                     </select>
+                    <span asp-validation-for="MovieID" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-12">
@@ -48,28 +50,32 @@
                     <select class="form-select" asp-for="ScreenID" asp-items="@(new SelectList(ViewBag.ScreenList,"ScreenID","ScreenName"))">
                         <option>Select Screen</option>
                     </select>
+                    <span asp-validation-for="ScreenID" class="text-danger"></span>
                 </div>
 
 
                 <div class="col-md-12">
                     <label>ShowTime</label>
                     <input type="time" class="form-control" placeholder="HH : MM : SS" asp-for="ShowTime">
+                    <span asp-validation-for="ShowTime" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-12">
                     <label>Available Seats</label>
                     <input type="number" class="form-control" placeholder="Enter Avaible Seats" asp-for="AvailableSeats">
+                    <span asp-validation-for="AvailableSeats" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-12">
                     <label>Price</label>
                     <input type="number" class="form-control" placeholder="Enter Price" asp-for="Price">
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Save</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
-                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Cinema" asp-action="ShowTime_List">Back</a>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="ShowTime" asp-action="ShowTime_List">Back</a>
                 </div>
             </form><!-- End No Labels Form -->
 

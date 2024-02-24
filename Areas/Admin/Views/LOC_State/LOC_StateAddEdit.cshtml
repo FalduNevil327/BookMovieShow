@@ -18,9 +18,11 @@
 
                 <div class="col-md-12">
                     <input type="text" class="form-control" placeholder="Select State Name" asp-for="StateName">
+                    <span asp-validation-for="StateName" class="text-danger"></span>
                 </div>
                 <div class="col-md-12">
                     <input type="text" class="form-control" placeholder="Select State Code" asp-for="StateCode">
+                    <span asp-validation-for="StateCode" class="text-danger"></span>
                 </div>
 
                 <div class="text-center">
