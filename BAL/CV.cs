@@ -32,10 +32,10 @@
             return _httpContextAccessor.HttpContext.Session.GetString("UserName");
         }
 
-        //public static string Email()
-        //{
-        //    return _httpContextAccessor.HttpContext.Session.GetString("Email");
-        //}
+        public static string Email()
+        {
+            return _httpContextAccessor.HttpContext.Session.GetString("Email");
+        }
         //public static string? Username()
         //{
         //    string? Username = null;

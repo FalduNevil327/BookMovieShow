@@ -1675,8 +1675,8 @@ input[type="submit"] {
 }
 
 .banner-section {
-  padding: 250px 0 316px;
-  position: relative;
+    padding: 250px 0 316px;
+    position: relative;
 }
 
 @media (max-width: 991px) {
@@ -3432,6 +3432,7 @@ input[type="submit"] {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-bottom: -10px;
+
 }
 
 .ticket-tab-menu li {

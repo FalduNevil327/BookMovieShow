@@ -87,7 +87,7 @@ namespace BookMovieShow.Areas.SEC_Login.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("User_DashBoard", "User", new { area = "User" });
+                        return RedirectToAction("User_DashBoard", "UserDashBoard", new { area = "User" });
                     }
                 }
             }

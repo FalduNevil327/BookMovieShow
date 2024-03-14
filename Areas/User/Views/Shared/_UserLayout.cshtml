@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="~/assets2/css/jquery.animatedheadline.css">
     <link rel="stylesheet" href="~/assets2/css/main.css">
 
-    <link rel="shortcut icon" href="~/assets2/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="~/assets2/images/logo/logo12343.png" type="image/x-icon">
 
     <title>BookMovieShow  - DashBoard</title>
 
@@ -50,129 +50,69 @@
             <div class="header-wrapper">
                 <div class="logo">
                     <a href="index.html">
-                        <img src="~/assets2/images/logo/logo12.png" alt="logo">
+                        <img src="~/assets2/images/logo/logo1234.png" alt="logo">
                     </a>
                 </div>
                 <ul class="menu">
                     <li>
-                        <a asp-area="User" asp-controller="User" asp-action="User_DashBoard" class="active">Home</a>
+                        <a asp-area="User" asp-controller="UserDashBoard" asp-action="User_DashBoard" class="active">Home</a>
                     </li>
                     <li>
-                        <a href="#0">movies</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="movie-grid.html">Movie Grid</a>
-                            </li>
-                            <li>
-                                <a href="movie-list.html">Movie List</a>
-                            </li>
-                            <li>
-                                <a href="movie-details.html">Movie Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    @* <li>
-                        <a href="#0">events</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="events.html">Events</a>
-                            </li>
-                            <li>
-                                <a href="event-details.html">Event Details</a>
-                            </li>
-                            <li>
-                                <a href="event-speaker.html">Event Speaker</a>
-                            </li>
-                            <li>
-                                <a href="event-ticket.html">Event Ticket</a>
-                            </li>
-                            <li>
-                                <a href="event-checkout.html">Event Checkout</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#0">sports</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="sports.html">Sports</a>
-                            </li>
-                            <li>
-                                <a href="sport-details.html">Sport Details</a>
-                            </li>
-                            <li>
-                                <a href="sports-ticket.html">Sport Ticket</a>
-                            </li>
-                            <li>
-                                <a href="sports-checkout.html">Sport Checkout</a>
-                            </li>
-                        </ul>
-                    </li> *@
-                    <li>
-                        <a href="#0">pages</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="about.html">About Us</a>
-                            </li>
-                            <li>
-                                <a href="apps-download.html">Apps Download</a>
-                            </li>
-                            <li>
-                                <a asp-area="SEC_Login" asp-controller="SEC_Login" asp-action="SEC_LoginPage">Sign In</a>
-                            </li>
-                            <li>
-                                <a asp-area="SEC_Login" asp-controller="SEC_Login" asp-action="SEC_UserSignUp">Sign Up</a>
-                            </li>
-                            @* <li>
-                                <a href="404.html">404</a>
-                            </li> *@
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#0">blog</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="blog.html">Blog</a>
-                            </li>
-                            <li>
-                                <a href="blog-details.html">Blog Single</a>
-                            </li>
-                        </ul>
+                        <a asp-area="User" asp-controller="MovieList" asp-action="User_MovieList">Movies</a>
                     </li>
                     <li>
                         <a href="contact.html">contact</a>
                     </li>
                     <li>
-                        <a>Welcome, @CV.UserName()</a>
-                        <ul class="submenu">
-                            <li class="dropdown-header">
-                                <h6>@CV.UserName()</h6>
-                                @* <h3>@CV.Email</h3> *@
+                        @{
+                            if (CV.UserID() == 0)
+                            {
+
+                            <li class=" header-button pr-0">
+                                <a asp-area="SEC_Login" asp-controller="SEC_Login" asp-action="SEC_LoginPage" style="margin-right:30px; color:#e9eeff; font-weight:bold">
+                                    LOGIN / SIGN UP
+                                </a>
                             </li>
 
+                            }
+                            else
+                            {
                             <li>
-                                <a href="about.html">My Profile</a>
+                                <a>Welcome , @CV.UserName()</a>
+                                <ul class="submenu">
+                                    <li>
+                                        <h6 style="color:black;">@CV.UserName()</h6>
+                                        <span style="color:black;">@CV.Email()</span>
+                                    </li>
+                                    <li>
+                                        <a asp-area="User" asp-controller="User" asp-action="Profile">
+                                            <i class="bi bi-person"></i>
+                                            <span>My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="User" asp-controller="User" asp-action="BookingList">
+                                            <i class="bi bi-gear"></i>
+                                            <span>Booking History</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="bi bi-question-circle"></i>
+                                            <span>Need Help?</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Home" asp-action="Index">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                            <span>Sign Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="apps-download.html">Account Setting</a>
-                            </li>
-                            <li>
-                                <a>Neeed Help?</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Home" asp-action="Index">Log Out</a>
-                            </li>
-                            @* <li>
-                            <a href="404.html">404</a>
-                            </li> *@
-                        </ul>
-                    </li>
-                    <li class="header-button pr-0">
-                        <a asp-area="SEC_Login" asp-controller="SEC_Login" asp-action="SEC_LoginPage">join us</a>
-                    </li>
-
-                    
-
+                            }
+                        }
+                    </li><!--Sign In Button -->
                 </ul>
                 <div class="header-bar d-lg-none">
                     <span></span>
@@ -185,7 +125,7 @@
     <!-- ==========Header-Section========== -->
 
     <div class="container-fluid">
-        <main role="main" class="pb-3">
+        <main class="main pb-3">
             <section class="section">
                 @RenderBody()
             </section>
@@ -213,7 +153,7 @@
             <div class="footer-top">
                 <div class="logo">
                     <a href="index-1.html">
-                        <img src="~/assets2/images/footer/footer-logo12.png" style="height: 74px;" alt="footer">
+                        <img src="~/assets2/images/footer/footer-logo1234.png" style="height: 74px;" alt="footer">
                     </a>
                 </div>
                 <ul class="social-icons">
