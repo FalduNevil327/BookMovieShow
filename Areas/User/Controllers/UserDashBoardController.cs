@@ -23,8 +23,8 @@ namespace BookMovieShow.Areas.User.Controllers
             ViewBag.CityList = cinemasDAL.PR_City_ComboBox();
             ViewBag.CinemaList = cWMDAL.PR_Cinemas_ComboBox();
             DataTable dt = new DataTable();
-            dt = UD.PR_Movies_SelectAll();
-            return View();
+            dt = UD.GetRecentMovies();
+            return View(dt);
         }
         
     }

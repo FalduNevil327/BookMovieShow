@@ -6,13 +6,13 @@ namespace BookMovieShow.DAL.UserDashBoard
 {
     public class UserDashboard_DALBase :Dal_Helper
     {
-        #region PR_Movies_SelectAll
-        public DataTable PR_Movies_SelectAll()
+        #region GetRecentMovies
+        public DataTable GetRecentMovies()
         {
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Movies_SelectAll");
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("GetRecentMovies");
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
                 {

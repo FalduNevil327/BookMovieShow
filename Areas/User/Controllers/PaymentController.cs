@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookMovieShow.BAL;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookMovieShow.Areas.User.Controllers
 {
@@ -6,6 +7,7 @@ namespace BookMovieShow.Areas.User.Controllers
     [Route("User/[controller]/[action]")]
     public class PaymentController : Controller
     {
+        [CheckAccess]
         public IActionResult Payment()
         {
             return View();

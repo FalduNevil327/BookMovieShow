@@ -31,6 +31,14 @@ namespace BookMovieShow.Areas.SEC_Login.Controllers
             return View();
         }
 
+        #region SEC_UserLogOut
+        public IActionResult SEC_UserLogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("User_DashBoard", "UserDashBoard");
+        }
+        #endregion'
+
         #region Login
         [HttpPost]
         public IActionResult Login(SEC_LoginModel modelSEC_User)
