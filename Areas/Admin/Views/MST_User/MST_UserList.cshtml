@@ -1,13 +1,13 @@
 ﻿@{
+    ViewData["Title"] = "MST_User Page";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 @using System.Data;
 @model DataTable;
-@using BookMovieShow.Areas.Admin.Model
-@{
+@* @{
     MST_CinemaFilterModel FilterModel = new MST_CinemaFilterModel();
-}
+} *@
 
 <main id="main" class="main">
     @if (TempData["Msg"] != null)
@@ -29,12 +29,12 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Admin" asp-action="Admin_DashBoard">Home</a></li>
-                <li class="breadcrumb-item active">CinemaList</li>
+                <li class="breadcrumb-item active">MST_UserList</li>
             </ol>
         </nav>
     </div>
     <!--End Heading-->
-    <!--Filter-->
+    @* <!--Filter-->
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
@@ -74,7 +74,7 @@
             </div>
         </div>
     </section>
-    <!--End Filter-->
+    <!--End Filter--> *@
     <!--Start ListPage-->
     <section class="section">
         <div class="row">
@@ -90,15 +90,15 @@
                         </div>
                         <!--End Search bar-->
                         <div class="col-md-4" style="margin-inline-start: auto;">
-                            <a type="button" class="btn btn-outline-dark" asp-area="Admin" asp-controller="Cinema" asp-action="MST_CinemaAdd">
+                            <a type="button" class="btn btn-outline-dark" asp-area="Admin" asp-controller="MST_User" asp-action="MST_UserAddEdit">
                                 Add
                             </a>
 
-                            <a type="button" class="btn btn-outline-primary" asp-area="Admin" asp-controller="Cinema" asp-action="ExportSToExcel">
+                            <a type="button" class="btn btn-outline-primary" asp-area="Admin" asp-controller="MST_User" asp-action="ExportSToExcel">
                                 Export
                             </a>
 
-                            <a type="button" class="btn btn-outline-danger" id="deleteSelectedBtn" asp-area="Admin" asp-controller="Cinema" asp-action="MultipleDelete">Multiple Delete</a>
+                            <a type="button" class="btn btn-outline-danger" id="deleteSelectedBtn" asp-area="Admin" asp-controller="MST_User" asp-action="MultipleDelete">Multiple Delete</a>
                         </div>
 
                     </div>
@@ -112,12 +112,16 @@
                                 <tr>
                                     @*<th>Check</th>*@
                                     <th><input type="checkbox" class="selectall" name="sample"></th>
-                                    <th scope="col">Cinema ID</th>
-                                    <th scope="col">Cinema name</th>
-                                    <th scope="col">Capacity</th>
-                                    <th scope="col">Screen Number</th>
-                                    <th scope="col">State Name</th>
-                                    <th scope="col">City Name</th>
+                                    @* <th scope="col">UserID ID</th> *@
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Password</th>
+                                    <th scope="col">FullName</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">PhoneNumber</th>
+                                    <th scope="col">Address</th>
+                                    @* <th scope="col">RegistrationDate</th> *@
+                                    @* <th scope="col">IsAdmin</th>
+                                    <th scope="col">IsActive</th> *@
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -125,26 +129,30 @@
                                 @foreach (DataRow dr in Model.Rows)
                                 {
                                     <tr>
-                                        <td><input type="checkbox" class="chkDelete" name="chkDeleteName" value="@dr["CinemaID"]"></td>
-                                        <td>@dr["CinemaID"]</td>
-                                        <td>@dr["CinemaName"]</td>
-                                        <td>@dr["Capacity"]</td>
-                                        <td>@dr["ScreenNumber"]</td>
-                                        <td>@dr["StateName"]</td>
-                                        <td>@dr["CityName"]</td>
+                                        <td><input type="checkbox" class="chkDelete" name="chkDeleteName" value="@dr["UserID"]"></td>
+                                        @* <td>@dr["UserID"]</td> *@
+                                        <td>@dr["UserName"]</td>
+                                        <td>@dr["Password"]</td>
+                                        <td>@dr["FullName"]</td>
+                                        <td>@dr["Email"]</td>
+                                        <td>@dr["PhoneNumber"]</td>
+                                        <td>@dr["Address"]</td>
+                                        @* <td>@dr["RegistrationDate"]</td>
+                                        <td>@dr["IsAdmin"]</td>
+                                        <td>@dr["IsActive"]</td> *@
                                         <td>
                                             <div class="d-flex" style="justify-content: center;">
 
                                                 <div class="me-2">
-                                                    <form method="post" asp-area="Admin" asp-controller="Cinema" asp-action="MST_CinemaDelete">
-                                                        <input type="hidden" value="@Convert.ToInt32(dr["CinemaID"])" name="CinemaID" />
+                                                    <form method="post" asp-area="Admin" asp-controller="MST_User" asp-action="MST_UserDelete">
+                                                        <input type="hidden" value="@Convert.ToInt32(dr["UserID"])" name="UserID" />
 
                                                         <button type="submit" class="btn btn-danger" value="Delete" onclick="return fun1();"><i class="bi bi-bucket"></i></button>
                                                     </form>
                                                 </div>
                                                 <div class="ms-2">
-                                                    <form asp-area="Admin" asp-controller="Cinema" asp-action="MST_CinemaAdd">
-                                                        <input type="hidden" value="@Convert.ToInt32(dr["CinemaID"])" name="CinemaID" />
+                                                    <form asp-area="Admin" asp-controller="MST_User" asp-action="MST_UserAddEdit">
+                                                        <input type="hidden" value="@Convert.ToInt32(dr["UserID"])" name="UserID" />
                                                         <button type="submit" class="btn btn-success"><i class="bi bi-pen"></i></button>
                                                     </form>
                                                 </div>

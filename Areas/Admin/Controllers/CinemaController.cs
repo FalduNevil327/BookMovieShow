@@ -88,6 +88,15 @@ namespace BookMovieShow.Areas.Admin.Controllers
         }
         #endregion
 
+        #region CityDropDownByStateID
+        public IActionResult CityDropDownByStateID(int StateID)
+        {
+            var model = cinemasDAL.PR_City_ComboBoxbyStateID(StateID);
+            return Json(model);
+
+        }
+        #endregion
+
         #region Cinema Detail
         public IActionResult MST_CinemaDetails(int CinemaID = 0)
         {

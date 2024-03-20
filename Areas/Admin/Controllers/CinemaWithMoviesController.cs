@@ -1,8 +1,6 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
 using BookMovieShow.DAL.CinemaWithMovies;
-using BookMovieShow.DAL.MST_Movie;
 using ClosedXML.Excel;
-using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using System.Data;
@@ -46,15 +44,11 @@ namespace BookMovieShow.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 if (cWMDAL.PR_CinemaWithMovies_Insert(cWM))
-
                 {
-                    Console.WriteLine(cWM.MovieID);
+                    Console.WriteLine(cWM.MovieIDs);
                     TempData["Msg"] = "Record Inserted Successfully";
                     return RedirectToAction("CinemaWithMovies_List");
                 }
-
-
-
             }
             TempData["Msg"] = "Record Updated Successfully";
             return View("CinemaWithMovies_Add");
@@ -66,14 +60,18 @@ namespace BookMovieShow.Areas.Admin.Controllers
         {
             CinemaWithMoviesModel cWMModel = cWMDAL.PR_CinemaWithMovies_SelectByID(ID);
 
-            if (cWMModel != null)
+            if (cWMModel.ID != 0)
             {
+                TempData["PageTitle"] = "Cinema Edit Page";
                 ViewBag.CinemaList = cWMDAL.PR_Cinemas_ComboBox();
                 ViewBag.MovieList = cWMDAL.PR_Movies_ComboBox();
                 return View("CinemaWithMovies_Add", cWMModel);
             }
             else
             {
+                TempData["PageTitle"] = "Cinema Edit Page";
+                ViewBag.CinemaList = cWMDAL.PR_Cinemas_ComboBox();
+                ViewBag.MovieList = cWMDAL.PR_Movies_ComboBox();
                 return View("CinemaWithMovies_Add");
             }
         }

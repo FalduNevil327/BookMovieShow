@@ -23,7 +23,7 @@
                 
                 <div class="col-md-6">
                     <label>State</label>
-                    <select class="form-select" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+                    <select class="form-select" asp-for="StateID" onchange="fnOnStateChange();" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
                         <option>Select State</option>
                     </select>
                     <span asp-validation-for="StateID" class="text-danger"></span>
@@ -62,4 +62,34 @@
 
 @section Scripts
     {
+    <script>
+        function fnOnStateChange() {
+            var stateID = $("#StateID").val();
+            if (stateID !== "") {
+                $("#CityID").empty();
+                $("#CityID").append($("<option></option>").val("").html("Select City"));
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("CityDropDownByStateID", "Cinema")" + "?stateID=" + stateID,
+                    data: {},
+                    dataType: "json",
+                    success: function (result) {
+                        $.each(result,
+                            function (key, value) {
+                                $("#CityID").append($("<option></option>").val(value.cityID).html(value.cityName));
+                            });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("Error while loading City.");
+                    }
+                });
+            } else {
+                $("#CityID").empty();
+                $("#CityID").append($("<option></option>").val("").html("Select City"));
+            }
+        }
+    </script>
+
 }

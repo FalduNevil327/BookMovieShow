@@ -1,0 +1,76 @@
+﻿@model BookMovieShow.Areas.Admin.Model.MST_UserModel
+
+@{
+    ViewData["Title"] = "Customer Add/Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main id="main" class="main">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">User Add/Edit Page</h5>
+
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="MST_User" asp-action="MST_UserSave">
+                @Html.HiddenFor(x => x.UserID)
+
+                <div class="col-md-12">
+                    <label>User Name</label>
+                    <input type="text" class="form-control" placeholder="Enter User Name" asp-for="UserName">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Enter PassWord" asp-for="Password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Full Name" asp-for="FullName">
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Email</label>
+                    <input type="email" class="form-control" placeholder="Enter Email" asp-for="Email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>PhoneNumber</label>
+                    <input type="number" class="form-control" placeholder="Enter PhoneNumber" asp-for="PhoneNumber">
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>Address</label>
+                    <textarea class="form-control" placeholder="Enter Address" asp-for="Address"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                @* <div class="col-md-12">
+                    <label>IsAdmin</label>
+                    <input type="text" class="form-control" placeholder="" asp-for="IsAdmin">
+                    <span asp-validation-for="IsAdmin" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12">
+                    <label>IsActive</label>
+                    <input type="number" class="form-control" placeholder="" asp-for="IsActive">
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div> *@
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a class="btn btn-danger" asp-area="Admin" asp-controller="MST_User" asp-action="MST_UserList">Back</a>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+</main>

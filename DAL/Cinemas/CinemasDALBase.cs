@@ -28,7 +28,7 @@ namespace BookMovieShow.DAL.Cinemas
         }
         #endregion
 
-        #region PR_Movies_Insert
+        #region PR_Cinemas_Insert
         public bool PR_Cinemas_Insert(MST_CinemaModel mST_CinemaModel)
         {
             SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);

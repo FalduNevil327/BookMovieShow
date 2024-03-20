@@ -8,15 +8,17 @@ namespace BookMovieShow.DAL.MovieList
 {
     public class MovieListDALBase : Dal_Helper
     {
-        #region PR_Movies_SelectByID
-        public DataTable PR_Movies_SelectByID(int CityID)
+        #region PR_Movies_SelectByStateCityAndCinemaID
+        public DataTable PR_Movies_SelectByStateCityAndCinemaID(int StateID,int CityID, int CinemaID)
         {
             MST_MovieModel movieModel = new MST_MovieModel();
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Movies_SelectByTitleAndCityID");
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Movies_SelectByStateCityAndCinemaID");
+                sqlDatabase.AddInParameter(dbCommand, "@StateID", DbType.Int32, StateID);
                 sqlDatabase.AddInParameter(dbCommand, "@CityID", DbType.Int32, CityID);
+                sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, CinemaID);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
                 {

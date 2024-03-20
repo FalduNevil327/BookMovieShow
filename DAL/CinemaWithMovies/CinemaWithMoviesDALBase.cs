@@ -37,26 +37,38 @@ namespace BookMovieShow.DAL.CinemaWithMovies
             {
                 if (cWM.ID == 0)
                 {
-                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_CinemaWithMovies_Insert");
-                    sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, cWM.CinemaID);
-                    sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, cWM.MovieID);
-                    //sqlDatabase.AddInParameter(dbCommand, "@MovieIDs", DbType.Int32, cWM.MovieIDs);
-                    
+                    foreach (int movieID in cWM.MovieIDs)
+                    {
+                        DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_CinemaWithMovies_Insert");
+                        sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, cWM.CinemaID);
+                        sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, movieID);
+
+                        bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
+                        if (!isSuccess)
+                        {
+                            return false;
+                        }
+                    }
                     Console.WriteLine("SuccessDALAdd");
-                    bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
-                    return isSuccess;
+                    return true;
                 }
                 else
                 {
-                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_CinemaWithMovies_Update");
+                    foreach (int movieID in cWM.MovieIDs)
+                    {
+                        DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_CinemaWithMovies_Update");
+                        sqlDatabase.AddInParameter(dbCommand, "@ID", DbType.Int32, cWM.ID);
+                        sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, cWM.CinemaID);
+                        sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, movieID);
 
-                    sqlDatabase.AddInParameter(dbCommand, "@ID", DbType.Int32, cWM.ID);
-                    sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, cWM.CinemaID);
-                    sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, cWM.MovieID);
-                    //sqlDatabase.AddInParameter(dbCommand, "@MovieIDs", DbType.Int32, cWM.MovieIDs);
+                        bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
+                        if (!isSuccess)
+                        {
+                            return false;
+                        }
+                    }
                     Console.WriteLine("SuccessDALUpdate");
-                    bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
-                    return isSuccess;
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -85,7 +97,12 @@ namespace BookMovieShow.DAL.CinemaWithMovies
                 {
                     cWM.ID = Convert.ToInt32(dataRow["ID"]);
                     cWM.CinemaID = Convert.ToInt32(dataRow["CinemaID"]);
-                    cWM.MovieID = Convert.ToInt32(dataRow["MovieID"]);
+                    //cWM.MovieIDs = (List<int>?)dataRow["MovieID"];
+                    cWM.MovieIDs = new List<int>();
+                    foreach (var item in dataRow["MovieID"].ToString().Split(',')) // Assuming the movie IDs are stored as comma-separated string
+                    {
+                        cWM.MovieIDs.Add(int.Parse(item));
+                    }
                 }
                 return cWM;
             }
@@ -98,7 +115,7 @@ namespace BookMovieShow.DAL.CinemaWithMovies
 
         #region  PR_CinemaWithMovies_Delete
         public bool PR_CinemaWithMovies_Delete(int ID)
-            {
+        {
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
@@ -115,7 +132,7 @@ namespace BookMovieShow.DAL.CinemaWithMovies
         }
         #endregion
 
-        
+
 
 
 
