@@ -9,6 +9,7 @@
         public int PhoneNumber { get; set; }
         public DateTime? RegistrationDate {  get; set; }
         public string? Address {  get; set; }
+        public string? ProfileImage {  get; set; }
         public bool? IsAdmin { get; set; }
         public bool? IsActive { get; set; }
     }

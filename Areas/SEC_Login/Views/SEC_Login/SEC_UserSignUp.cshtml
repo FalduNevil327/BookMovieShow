@@ -1,4 +1,4 @@
-﻿﻿@{
+﻿    ﻿@{
     ViewData["Title"] = "Sign Up";
     Layout = "~/Areas/SEC_Login/Views/Shared/_SignUp_Layout.cshtml";
 }
@@ -73,6 +73,13 @@
                                     @* <input type="text" class="form-control" asp-for="Address" required> *@
                                     @* <span asp-validation-for="Address" class="text-danger"></span>
                                     <div class="invalid-feedback">Please enter your Address</div> *@
+                                </div>
+
+                                <div class="col-12">
+                                    @* <label for="inputNumber" class="col-sm-2 col-form-label">Profile Image Upload</label> *@
+                                    <input class="form-control" type="file" id="formFile" asp-for="ProfileImage" placeholder="Upload Image">
+                                    @* <span asp-validation-for="PhoneNumber" class="text-danger"></span> *@
+                                    @* <div class="invalid-feedback">Please enter your Phone Number</div> *@
                                 </div>
 
                                 <div class="col-12">

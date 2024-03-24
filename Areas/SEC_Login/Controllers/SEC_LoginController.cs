@@ -129,9 +129,14 @@ namespace BookMovieShow.Areas.SEC_Login.Controllers
                 TempData["EmailError"] = "Email Address is Required!";
             }
 
+            //if (modelSEC_User.ProfileImage == null)
+            //{
+            //    TempData["ProfileImageError"] = "Image is Required!";
+            //}
+
             if (TempData["UserNameError"] != null || TempData["PasswordError"] != null || TempData["FullNameError"] != null || TempData["PhoneNumberError"] != null || TempData["EmailError"] != null)
             {
-                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User.UserName, modelSEC_User.Password, modelSEC_User.FullName, modelSEC_User.PhoneNumber, modelSEC_User.Email,modelSEC_User.Address);
+                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User.UserName, modelSEC_User.Password, modelSEC_User.FullName, modelSEC_User.PhoneNumber, modelSEC_User.Email,modelSEC_User.Address,modelSEC_User.ProfileImage);
                 if (IsSuccess)
                 {
                     return RedirectToAction("SEC_LoginPage");
@@ -144,7 +149,7 @@ namespace BookMovieShow.Areas.SEC_Login.Controllers
 
             else
             {
-                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User.UserName, modelSEC_User.Password, modelSEC_User.FullName, modelSEC_User.PhoneNumber,modelSEC_User.Email,modelSEC_User.Address);
+                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User.UserName, modelSEC_User.Password, modelSEC_User.FullName, modelSEC_User.PhoneNumber,modelSEC_User.Email,modelSEC_User.Address,modelSEC_User.ProfileImage);
                 if (IsSuccess)
                 {
                     return RedirectToAction("SEC_LoginPage");

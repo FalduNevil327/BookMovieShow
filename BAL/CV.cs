@@ -32,6 +32,11 @@
             return _httpContextAccessor.HttpContext.Session.GetString("UserName");
         }
 
+        public static string FullName()
+        {
+            return _httpContextAccessor.HttpContext.Session.GetString("FullName");
+        }
+
         public static string Email()
         {
             return _httpContextAccessor.HttpContext.Session.GetString("Email");

@@ -34,7 +34,7 @@ namespace BookMovieShow.DAL.SEC_Login
         #endregion
 
         #region Method: SEC_User_Register
-        public bool SEC_User_Register(string UserName, string Password, string FullName, int PhoneNumber, string Email,String Address)
+        public bool SEC_User_Register(string UserName, string Password, string FullName, int PhoneNumber, string Email,String Address,String ProfileImage)
         {
             try
             {
@@ -60,9 +60,10 @@ namespace BookMovieShow.DAL.SEC_Login
                     sqlDatabase.AddInParameter(dbCommand1, "PhoneNumber", DbType.Int32, PhoneNumber);
                     sqlDatabase.AddInParameter(dbCommand1, "Email", DbType.String, Email);
                     sqlDatabase.AddInParameter(dbCommand1, "Address", DbType.String, Address);
-                    sqlDatabase.AddInParameter(dbCommand1, "isAdmin", DbType.Boolean, DBNull.Value);
-                    sqlDatabase.AddInParameter(dbCommand1, "IsActive", DbType.Boolean, DBNull.Value);
-                    sqlDatabase.AddInParameter(dbCommand1, "RegistrationDate", SqlDbType.DateTime, DBNull.Value);
+                    sqlDatabase.AddInParameter(dbCommand1, "ProfileImage", DbType.String, ProfileImage);
+                    //sqlDatabase.AddInParameter(dbCommand1, "isAdmin", DbType.Boolean, DBNull.Value);
+                    //sqlDatabase.AddInParameter(dbCommand1, "IsActive", DbType.Boolean, DBNull.Value);
+                    //sqlDatabase.AddInParameter(dbCommand1, "RegistrationDate", SqlDbType.DateTime, DBNull.Value);
                     if (Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand1)))
                     {
                         return true;
