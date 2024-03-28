@@ -88,6 +88,37 @@ namespace BookMovieShow.DAL.CinemaWithMovies
         }
         #endregion
 
+        #region PR_Movie_ComboBoxbyCinemaID
+        public List<MST_MoviesDropDownModel> PR_Movie_ComboBoxbyCinemaID(int cinemaID)
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Movie_ComboBoxbyCinemaID");
+                sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, cinemaID);
+                DataTable dataTable = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                List<MST_MoviesDropDownModel> listOfMovies = new List<MST_MoviesDropDownModel>();
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    MST_MoviesDropDownModel model = new MST_MoviesDropDownModel();
+                    model.MovieID = Convert.ToInt32(dataRow["MovieID"]);
+                    model.Title = dataRow["Title"].ToString();
+                    listOfMovies.Add(model);
+                }
+                return listOfMovies;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+
 
 
     }

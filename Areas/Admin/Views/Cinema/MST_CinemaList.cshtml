@@ -50,13 +50,13 @@
                             </div>
 
                             <div class="col-md-4">
-                                <select class="form-select" onchange="fnOnStateChange();" asp-for="@FilterModel.StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+                                <select class="form-select" id="StateID" onchange="fnOnStateChange();" asp-for="@FilterModel.StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
                                     <option value="">Select State</option>
                                 </select>
                             </div>
 
                             <div class="col-md-4">
-                                <select class="form-select" asp-for="@FilterModel.CityID" asp-items="@(new SelectList(ViewBag.CityList,"CityID","CityName"))">
+                                <select class="form-select" id="CityID" asp-for="@FilterModel.CityID" asp-items="@(new SelectList(ViewBag.CityList,"CityID","CityName"))">
                                     <option value="">Select City</option>
                                 </select>
                             </div>
@@ -244,7 +244,7 @@
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
-                    url: "@Url.Action("CityDropDownByStateID", "Movie")" + "?stateID=" + stateID,
+                    url: "@Url.Action("CityDropDownByStateID", "Cinema")" + "?stateID=" + stateID,
                     data: {},
                     dataType: "json",
                     success: function (result) {
@@ -255,7 +255,7 @@
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
-                        alert("Error while loading City.");
+                        alert("Error while loading cities.");
                     }
                 });
             } else {

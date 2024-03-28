@@ -64,5 +64,29 @@ namespace BookMovieShow.DAL.Screen
             }
         }
         #endregion
+
+        #region PR_Screen_Filter
+        public DataTable PR_Screen_Filter(Screen_FilterModel filterModel)
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Screen_Filter");
+                sqlDatabase.AddInParameter(dbCommand, "@CinemaName", DbType.String, filterModel.CinemaName);
+                sqlDatabase.AddInParameter(dbCommand, "@Title", DbType.String, filterModel.Title);
+                sqlDatabase.AddInParameter(dbCommand, "@ScreenName", DbType.String, filterModel.ScreenName);
+                DataTable dataTable = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }

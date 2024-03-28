@@ -7,7 +7,7 @@
 @model BookMovieShow.Areas.Admin.Model.MST_MovieModel
 
 <!-- ==========Banner-Section========== -->
-<section class="details-banner bg_img" data-background=@Url.Content("~/assets2/images/banner/banner03.jpg")>
+<section class="details-banner bg_img" data-background=@Url.Content(Model.PosterImageURL)>
     <div class="container">
         <div class="details-banner-wrapper">
             <div class="details-banner-thumb">
@@ -17,7 +17,7 @@
                 </a>
             </div>
             <div class="details-banner-content offset-lg-3">
-                <h3 class="title">Venus</h3>
+                <h3 class="title">@Model.Title</h3>
                 <div class="tags">
                     <a href="#0">@Model.Language</a>
                 </div>

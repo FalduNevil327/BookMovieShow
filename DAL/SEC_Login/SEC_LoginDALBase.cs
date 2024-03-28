@@ -2,6 +2,8 @@
 using System.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+using BookMovieShow.Areas.Admin.Model;
+using BookMovieShow.Areas.SEC_Login.Models;
 
 namespace BookMovieShow.DAL.SEC_Login
 {
@@ -34,13 +36,32 @@ namespace BookMovieShow.DAL.SEC_Login
         #endregion
 
         #region Method: SEC_User_Register
-        public bool SEC_User_Register(string UserName, string Password, string FullName, int PhoneNumber, string Email,String Address,String ProfileImage)
+        public bool SEC_User_Register(SEC_LoginModel sEC_LoginModel)
         {
+            
+            
+            if (sEC_LoginModel.ProfilePhoto != null)
+            {
+                string FilePath = "wwwroot\\images";
+                string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                string fileNameWithPath = Path.Combine(path, sEC_LoginModel.ProfilePhoto.FileName);
+
+                sEC_LoginModel.ProfileImage = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + sEC_LoginModel.ProfilePhoto.FileName;
+
+                using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
+                {
+                    sEC_LoginModel.ProfilePhoto.CopyTo(fileStream);
+                }
+            }
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
                 DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("User_SelectUserName");
-                sqlDatabase.AddInParameter(dbCommand, "UserName", DbType.String, UserName);
+                sqlDatabase.AddInParameter(dbCommand, "UserName", DbType.String, sEC_LoginModel.UserName);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
                 {
@@ -54,13 +75,13 @@ namespace BookMovieShow.DAL.SEC_Login
                 else
                 {
                     DbCommand dbCommand1 = sqlDatabase.GetStoredProcCommand("PR_User_Insert");
-                    sqlDatabase.AddInParameter(dbCommand1, "UserName", DbType.String, UserName);
-                    sqlDatabase.AddInParameter(dbCommand1, "Password", DbType.String, Password);
-                    sqlDatabase.AddInParameter(dbCommand1, "FullName", DbType.String, FullName);
-                    sqlDatabase.AddInParameter(dbCommand1, "PhoneNumber", DbType.Int32, PhoneNumber);
-                    sqlDatabase.AddInParameter(dbCommand1, "Email", DbType.String, Email);
-                    sqlDatabase.AddInParameter(dbCommand1, "Address", DbType.String, Address);
-                    sqlDatabase.AddInParameter(dbCommand1, "ProfileImage", DbType.String, ProfileImage);
+                    sqlDatabase.AddInParameter(dbCommand1, "UserName", DbType.String, sEC_LoginModel.UserName);
+                    sqlDatabase.AddInParameter(dbCommand1, "Password", DbType.String, sEC_LoginModel.Password);
+                    sqlDatabase.AddInParameter(dbCommand1, "FullName", DbType.String, sEC_LoginModel.FullName);
+                    sqlDatabase.AddInParameter(dbCommand1, "PhoneNumber", DbType.Int32, sEC_LoginModel.PhoneNumber);
+                    sqlDatabase.AddInParameter(dbCommand1, "Email", DbType.String, sEC_LoginModel.Email);
+                    sqlDatabase.AddInParameter(dbCommand1, "Address", DbType.String, sEC_LoginModel.Address);
+                    sqlDatabase.AddInParameter(dbCommand1, "ProfileImage", DbType.String, sEC_LoginModel.ProfileImage);
                     //sqlDatabase.AddInParameter(dbCommand1, "isAdmin", DbType.Boolean, DBNull.Value);
                     //sqlDatabase.AddInParameter(dbCommand1, "IsActive", DbType.Boolean, DBNull.Value);
                     //sqlDatabase.AddInParameter(dbCommand1, "RegistrationDate", SqlDbType.DateTime, DBNull.Value);

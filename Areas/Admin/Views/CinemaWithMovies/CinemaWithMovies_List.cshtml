@@ -46,13 +46,13 @@
             <form class="row g-3" method="post" asp-area="Admin" asp-controller="CinemaWithMovies" asp-action="CinemaWithMovies_Filter">
 
                 <div class="col-md-4">
-                    <select class="form-select" asp-for="@FilterModel.CinemaName" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaName","CinemaName"))">
+                    <select class="form-select" id="CinemaID" asp-for="@FilterModel.CinemaName" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaName","CinemaName"))">
                         <option value="">Select Cinema</option>
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    <select class="form-select" asp-for="@FilterModel.Title" asp-items="@(new SelectList(ViewBag.MovieList,"Title","Title"))">
+                    <select class="form-select" id="MovieID" asp-for="@FilterModel.Title" asp-items="@(new SelectList(ViewBag.MovieList,"Title","Title"))">
                         <option value="">Select Movie</option>
                     </select>
                 </div>

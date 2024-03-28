@@ -90,7 +90,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
         }
         #endregion
 
-        #region Cinema Filter
+        #region Movie Filter
         public IActionResult MST_MovieFilter(MST_MovieFilterModel filterModel)
         {
             DataTable dt = mST_MovieDAL.PR_Movies_Filter(filterModel);

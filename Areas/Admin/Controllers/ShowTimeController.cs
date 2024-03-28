@@ -98,6 +98,15 @@ namespace BookMovieShow.Areas.Admin.Controllers
         }
         #endregion
 
+        #region ShowTime_Search
+        public IActionResult ShowTime_Search(string? Title)
+        {
+
+            DataTable dt = sTDAL.PR_ShowTime_SearchByTitle(Title);
+            return View("ShowTime_List", dt);
+        }
+        #endregion
+
         #region ShowTime Multiple Delete
         [HttpPost]
         public ActionResult MultipleDelete(int[] id)

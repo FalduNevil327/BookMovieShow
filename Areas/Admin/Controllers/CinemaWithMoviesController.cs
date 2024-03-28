@@ -1,4 +1,5 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
+using BookMovieShow.DAL.Cinemas;
 using BookMovieShow.DAL.CinemaWithMovies;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
@@ -100,6 +101,15 @@ namespace BookMovieShow.Areas.Admin.Controllers
             ViewBag.MovieList = cWMDAL.PR_Movies_ComboBox();
             DataTable dt = cWMDAL.PR_CinemasWithMovies_Filter(filterModel);
             return View("CinemaWithMovies_List", dt);
+        }
+        #endregion
+
+        #region MovieDropDownByCinemaID
+        public IActionResult MovieDropDownByCinemaID(int CinemaID)
+        {
+            var model = cWMDAL.PR_Movie_ComboBoxbyCinemaID(CinemaID);
+            return Json(model);
+
         }
         #endregion
 

@@ -5,6 +5,10 @@
 
 @using System.Data
 @model DataTable;
+@using BookMovieShow.Areas.Admin.Model
+@{
+    Screen_FilterModel filterModel = new Screen_FilterModel();
+}
 
 <main class="main" id="main">
     @if (TempData["Msg"] != null)
@@ -31,7 +35,40 @@
         </nav>
     </div>
     <!--End Heading-->
+    <!-- Filter-->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Filter</h5>
 
+            <!-- No Labels Form -->
+            <form class="row g-3" method="post" asp-area="Admin" asp-controller="Screen" asp-action="Screen_Filter">
+
+                <div class="col-md-4">
+                    <select class="form-select" id="CinemaID" asp-for="@filterModel.CinemaName" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaName","CinemaName"))">
+                        <option value="">Select Cinema</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <select class="form-select" id="MovieID" asp-for="@filterModel.Title" asp-items="@(new SelectList(ViewBag.MovieList,"Title","Title"))">
+                        <option value="">Select Movie</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="Enter Screen Name" asp-for="@filterModel.ScreenName">
+                </div>
+
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form><!-- End No Labels Form -->
+
+        </div>
+
+    </div>
+    <!--End Filter-->
     <!--Start ListPage-->
     <section class="section">
         <div class="row">

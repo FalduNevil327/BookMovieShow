@@ -1,4 +1,5 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
+using DocumentFormat.OpenXml.EMMA;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
@@ -150,6 +151,28 @@ namespace BookMovieShow.DAL.ShowTime
                     listOfScreens.Add(model);
                 }
                 return listOfScreens;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region PR_ShowTime_SearchByTitle
+        public DataTable PR_ShowTime_SearchByTitle(string? Title)
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ShowTime_SearchByTitle");
+                sqlDatabase.AddInParameter(dbCommand, "@Title", DbType.String, Title);
+                DataTable dataTable = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                return dataTable;
             }
             catch (Exception ex)
             {

@@ -36,8 +36,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
         #region Profile Save
         public IActionResult Profile_Save(ProfileModel profileModel)
         {
-            if (ModelState.IsValid)
-            {
+            
                 if (profile_DAL.PR_Profile_Update(profileModel))
                 {
                     TempData["Msg"] = "Record Updated Successfully";
@@ -45,7 +44,6 @@ namespace BookMovieShow.Areas.Admin.Controllers
                     return RedirectToAction("Profile");
                 }
 
-            }
             TempData["Msg"] = "Record Inserted Error";
             return View("Profile");
         }
@@ -56,20 +54,9 @@ namespace BookMovieShow.Areas.Admin.Controllers
         {
             ProfileModel profileModel = profile_DAL.PR_Profile_SelectByID(UserID);
 
-            if (profileModel != null)
-            {
                 TempData["PageTitle"] = "Profile Edit Page";
-                //ViewBag.StateList = cinemasDAL.PR_State_ComboBox();
-                //ViewBag.CityList = cinemasDAL.PR_City_ComboBox();
                 return View("ProfileUpdate", profileModel);
-            }
-            else
-            {
-                TempData["PageTitle"] = "Profile Edit Page";
-                //ViewBag.StateList = cinemasDAL.PR_State_ComboBox();
-                //ViewBag.CityList = cinemasDAL.PR_City_ComboBox();
-                return View("ProfileUpdate");
-            }
+            
         }
         #endregion
     }

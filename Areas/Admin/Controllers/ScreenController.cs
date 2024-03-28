@@ -1,5 +1,6 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
 using BookMovieShow.DAL.Cinemas;
+using BookMovieShow.DAL.MST_Movie;
 using BookMovieShow.DAL.Screen;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
@@ -83,6 +84,16 @@ namespace BookMovieShow.Areas.Admin.Controllers
             }
 
             return RedirectToAction("ScreenList");
+        }
+        #endregion
+
+        #region Screen Filter
+        public IActionResult Screen_Filter(Screen_FilterModel filterModel)
+        {
+            ViewBag.CinemaList = screenDAL.PR_Cinemas_ComboBox();
+            ViewBag.MovieList = screenDAL.PR_Movies_ComboBox();
+            DataTable dt = screenDAL.PR_Screen_Filter(filterModel);
+            return View("ScreenList", dt);
         }
         #endregion
 

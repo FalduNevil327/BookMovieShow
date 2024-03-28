@@ -1,4 +1,5 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
+using BookMovieShow.Areas.User.Model;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;
@@ -68,5 +69,52 @@ namespace BookMovieShow.DAL.MovieList
             }
         }
         #endregion
+
+        #region PR_User_MovieList_FilterByGenreAndLanduage
+        public DataTable PR_User_MovieList_FilterByGenreAndLanduage(MovieList_FilterModel filterModel)
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_User_MovieList_FilterByGenreAndLanduage");
+                sqlDatabase.AddInParameter(dbCommand, "@Language", DbType.String, filterModel.Language);
+                sqlDatabase.AddInParameter(dbCommand, "@Genre", DbType.String, filterModel.Genre);
+                DataTable dataTable = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region PR_UserDashBoard_Filter
+        public DataTable PR_UserDashBoard_Filter(UserDashBoard_FilterModel filterModel)
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_UserDashBoard_Filter");
+                sqlDatabase.AddInParameter(dbCommand, "@StateID", DbType.Int32, filterModel.StateID);
+                sqlDatabase.AddInParameter(dbCommand, "@CityID", DbType.String, filterModel.CityID);
+                DataTable dataTable = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
     }
 }

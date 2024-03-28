@@ -36,36 +36,37 @@ namespace BookMovieShow.DAL.Profile
         public bool PR_Profile_Update(ProfileModel profileModel)
         {
             SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+            if (profileModel.ProfilePhoto != null)
+            {
+                string FilePath = "wwwroot\\images";
+                string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                string fileNameWithPath = Path.Combine(path, profileModel.ProfilePhoto.FileName);
+
+                profileModel.ProfileImage = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + profileModel.ProfilePhoto.FileName;
+
+                using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
+                {
+                    profileModel.ProfilePhoto.CopyTo(fileStream);
+                }
+            }
             try
             {
-                //if (mST_CinemaModel.CinemaID == 0)
-                //{
-                //    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Cinemas_Insert");
-                //    sqlDatabase.AddInParameter(dbCommand, "@CinemaName", DbType.String, mST_CinemaModel.CinemaName);
-                //    //sqlDatabase.AddInParameter(dbCommand, "@Location", DbType.String, mST_CinemaModel.Location);
-                //    sqlDatabase.AddInParameter(dbCommand, "@CityID", DbType.Int32, mST_CinemaModel.CityID);
-                //    sqlDatabase.AddInParameter(dbCommand, "@Capacity", DbType.Int32, mST_CinemaModel.Capacity);
-                //    sqlDatabase.AddInParameter(dbCommand, "@ScreenNumber", DbType.Int32, mST_CinemaModel.ScreenNumber);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Profile_Update");
 
-
-                //    Console.WriteLine("SuccessDALAdd");
-                //    bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
-                //    return isSuccess;
-                //}
-                //else
-                //{
-                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Profile_Update");
-
-                    sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, profileModel.UserID);
-                    sqlDatabase.AddInParameter(dbCommand, "@UserName", DbType.String, profileModel.UserName);
-                    sqlDatabase.AddInParameter(dbCommand, "@FullName", DbType.String, profileModel.FullName);
-                    sqlDatabase.AddInParameter(dbCommand, "@Email", DbType.String, profileModel.Email);
-                    sqlDatabase.AddInParameter(dbCommand, "@PhoneNumber", DbType.Int32, profileModel.PhoneNumber);
+                sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, profileModel.UserID);
+                sqlDatabase.AddInParameter(dbCommand, "@UserName", DbType.String, profileModel.UserName);
+                sqlDatabase.AddInParameter(dbCommand, "@FullName", DbType.String, profileModel.FullName);
+                sqlDatabase.AddInParameter(dbCommand, "@Email", DbType.String, profileModel.Email);
+                sqlDatabase.AddInParameter(dbCommand, "@PhoneNumber", DbType.String, profileModel.PhoneNumber);
                 sqlDatabase.AddInParameter(dbCommand, "@Address", DbType.String, profileModel.Address);
                 sqlDatabase.AddInParameter(dbCommand, "@ProfileImage", DbType.String, profileModel.ProfileImage);
                 Console.WriteLine("SuccessDALUpdate");
-                    bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
-                    return isSuccess;
+                bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
+                return isSuccess;
                 //}
             }
             catch (Exception ex)
@@ -97,9 +98,9 @@ namespace BookMovieShow.DAL.Profile
                     profileModel.Password = dataRow["Password"].ToString();
                     profileModel.FullName = dataRow["FullName"].ToString();
                     profileModel.Email = dataRow["Email"].ToString();
-                    profileModel.PhoneNumber = Convert.ToInt32(dataRow["PhoneNumber"]);
+                    profileModel.PhoneNumber = dataRow["PhoneNumber"].ToString();
                     profileModel.Address = dataRow["Address"].ToString();
-                    profileModel.ProfileImage =dataRow["ProfileImage"].ToString();
+                    profileModel.ProfileImage = dataRow["ProfileImage"].ToString();
                 }
                 return profileModel;
             }

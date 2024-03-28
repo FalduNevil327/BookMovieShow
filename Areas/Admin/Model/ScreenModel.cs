@@ -26,5 +26,13 @@ namespace BookMovieShow.Areas.Admin.Model
         public int? ScreenID { get; set; }
         public string? ScreenName { get; set; }
     }
+
+    public class Screen_FilterModel
+    {
+        public int? ID { get; set; }
+        public string? Title { get; set; }
+        public string? CinemaName { get; set; }
+        public string? ScreenName { get; set; }
+    }
 }
 

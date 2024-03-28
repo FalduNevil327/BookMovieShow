@@ -49,7 +49,6 @@ namespace BookMovieShow.DAL.UserDashBoard
         }
         #endregion
 
-
         #region PR_Movies_SelectByTitleAndCityID
         public DataTable PR_Movies_SelectByTitleAndCityID(int CityID)
         {

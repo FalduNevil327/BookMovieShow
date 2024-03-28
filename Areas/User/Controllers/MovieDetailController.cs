@@ -12,7 +12,7 @@ namespace BookMovieShow.Areas.User.Controllers
         MovieDetail_DAL movieDetail_DAL = new MovieDetail_DAL();
        
         #region Movie_Detail
-        public IActionResult MovieDetail(int MovieID = 0)
+        public IActionResult MovieDetail(int MovieID)
         {
             MST_MovieModel mST_MovieModel = movieDetail_DAL.PR_Movies_SelectByID(MovieID);
             return View("MovieDetail", mST_MovieModel);

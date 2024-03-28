@@ -30,6 +30,21 @@
         </nav>
     </div>
     <!--End Heading-->
+    <!--Search Bar-->
+    @* col-xl-4 ms-lg-auto d-flex *@
+    <div class="search-field">
+        <div class="me-3">
+            <form class="d-flex" method="get" asp-area="Admin" asp-controller="ShowTime" asp-action="ShowTime_Search">
+                <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search" runat="server" name="CountryName" />
+                <div><button type="submit" class="btn btn-success" value="Search" runat="server">Search</button></div>
+                <div style="margin-left: 10px;"><button type="reset" class="btn btn-secondary" value="Reset" runat="server">Reset</button></div>
+            </form>
+        </div>
+    </div>
+    <br />
+
+    <!--End Search Bar-->
+
     <!--Start ListPage-->
     <section class="section">
         <div class="row">

@@ -1,9 +1,23 @@
 ﻿@{
     ViewData["Title"] = "User DashBoard";
     Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+    
 }
 @using System.Data
 @model DataTable
+@using BookMovieShow.Areas.User.Model
+@{
+    UserDashBoard_FilterModel FilterModel = new UserDashBoard_FilterModel();
+}
+<style>
+    select{
+        background: border-box;
+        border: hidden;
+    }
+    option{
+        color: black;
+    }
+</style>
 
 <!-- Banner-Section -->
 <section class="banner-section">
@@ -49,37 +63,38 @@
                 </div>
             </div>
             <div class="tab-area">
-                <div class="tab-item active">
-                    <form method="post" class="ticket-search-form" asp-area="User" asp-controller="UserDashBoard" asp-action="MovieListByCity">
+                <div class="tab-item active row">
+                    <form method="post" class="ticket-search-form" asp-area="User" asp-controller="UserDashBoard" asp-action="UserDashBoard_Filter">
                         
-                        <div class="form-group">
+                        <div class="form-group col">
                             <div class="thumb">
                                 <img src="~/assets2/images/ticket/city.png" alt="ticket">
                             </div>
                             <span class="type">State</span>
-                            <select class="select-bar" name="StateID" onchange="fnOnStateChange();" asp-items="@(new SelectList(ViewBag.StateList, "StateID", "StateName"))">
+                            <select class=" form-select" id="StateID" onchange="fnOnStateChange();" asp-for="@FilterModel.StateID" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
                                 <option>Select State</option>
                             </select>
-                        </div> <!--City DropDown-->
-                        <div class="form-group">
+                        </div> <!--State DropDown-->
+                       
+                        <div class="form-group col">
                             <div class="thumb">
                                 <img src="~/assets2/images/ticket/date.png" alt="ticket">
                             </div>
                             <span class="type">date</span>
-                            <select class="select-bar" name="CityID" onchange="fnOnCityChange();" asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
+                            <select class=" form-select" id="CityID" asp-for="@FilterModel.CityID" onchange="fnOnCityChange();" asp-items="@(new SelectList(ViewBag.CityList, "CityID", "CityName"))">
                                 <option>Select City</option>
                             </select>
-                        </div> <!--Date DropDown-->
-                        <div class="form-group">
+                        </div> <!--City DropDown-->
+                       @*  <div class="form-group col">
                             <div class="thumb">
                                 <img src="~/assets2/images/ticket/cinema.png" alt="ticket">
                             </div>
                             <span class="type">cinema</span>
-                            <select class="select-bar" name="CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
+                            <select class=" form-select" id="CinemaID" asp-for="@FilterModel.CinemaID" asp-items="@(new SelectList(ViewBag.CinemaList,"CinemaID","CinemaName"))">
                                 <option>Select Cinema</option>
                             </select>
-                        </div> <!--Cinema DropDown-->
-                        <div class="form-group large">
+                        </div> <!--Cinema DropDown--> *@
+                        <div class="form-group col large">
                             <input type="text" placeholder="Search for Movies">
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </div>
@@ -116,7 +131,7 @@
                             <div class="item">
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="#0">
+                                        <a asp-route-MovieID="@dataRow["MovieID"]" asp-area="User" asp-controller="MovieDetail" asp-action="MovieDetail">
                                             <img src=@dataRow["PosterImageURL"] alt="movie">
                                         </a>
                                     </div>
@@ -209,6 +224,8 @@
     </div>
 </section>
 <!-- Movie-Section -->
+
+
 @section Scripts {
     <script>
         function fnOnStateChange() {
@@ -230,7 +247,7 @@
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
-                        alert("Error while loading City.");
+                        alert("Error while loading cities.");
                     }
                 });
             } else {
@@ -239,34 +256,37 @@
             }
         }
 
-        function fnOnCityChange() {
-            var stateID = $("#StateID").val();
-            var cityID = $("#CityID").val();
-            if (stateID !== "" && cityID !== "") {
-                $("#CinemaID").empty();
-                $("#CinemaID").append($("<option></option>").val("").html("Select Cinema"));
-                $.ajax({
-                    type: "POST",
-                    contentType: "application/json; charset=utf-8",
-                    url: "@Url.Action("CinemaDropDownByStateIDAndCityID", "UserDashBoard")" + "?StateID=" + StateID + "&cityID=" + cityID,
-                    data: {},
-                    dataType: "json",
-                    success: function (result) {
-                        $.each(result,
-                            function (key, value) {
-                                $("#CinemaID").append($("<option></option>").val(value.cinemaID).html(value.cinemaName));
-                            });
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                        alert("Error while loading Cinema.");
-                    }
-                });
-            } else {
-                $("#CinemaID").empty();
-                $("#CinemaID").append($("<option></option>").val("").html("Select Cinema"));
+            function fnOnCityChange() {
+                var stateID = $("#StateID").val();
+                var cityID = $("#CityID").val();
+                if (stateID !== "" && cityID !== "") {
+                    $("#CinemaID").empty();
+                    $("#CinemaID").append($("<option></option>").val("").html("Select Cinema"));
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("CinemaDropDownByStateIDAndCityID", "UserDashBoard")" + "?stateID=" + stateID + "&cityID=" + cityID,
+                        data: {},
+                        dataType: "json",
+                        success: function (result) {
+                            $.each(result,
+                                function (key, value) {
+                                    $("#CinemaID").append($("<option></option>").val(value.cinemaID).html(value.cinemaName));
+                                });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                            alert("Error while loading cinemas.");
+                        }
+                    });
+                } else {
+                    $("#CinemaID").empty();
+                    $("#CinemaID").append($("<option></option>").val("").html("Select Cinema"));
+                }
             }
-        }
-    </script>
 
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

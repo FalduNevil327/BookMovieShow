@@ -136,7 +136,7 @@ namespace BookMovieShow.Areas.SEC_Login.Controllers
 
             if (TempData["UserNameError"] != null || TempData["PasswordError"] != null || TempData["FullNameError"] != null || TempData["PhoneNumberError"] != null || TempData["EmailError"] != null)
             {
-                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User.UserName, modelSEC_User.Password, modelSEC_User.FullName, modelSEC_User.PhoneNumber, modelSEC_User.Email,modelSEC_User.Address,modelSEC_User.ProfileImage);
+                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User);
                 if (IsSuccess)
                 {
                     return RedirectToAction("SEC_LoginPage");
@@ -149,7 +149,7 @@ namespace BookMovieShow.Areas.SEC_Login.Controllers
 
             else
             {
-                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User.UserName, modelSEC_User.Password, modelSEC_User.FullName, modelSEC_User.PhoneNumber,modelSEC_User.Email,modelSEC_User.Address,modelSEC_User.ProfileImage);
+                bool IsSuccess = loginDal.SEC_User_Register(modelSEC_User);
                 if (IsSuccess)
                 {
                     return RedirectToAction("SEC_LoginPage");
