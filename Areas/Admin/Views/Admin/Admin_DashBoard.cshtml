@@ -38,7 +38,7 @@
                     <!-- User -->
                     <div class="col-xxl-4 col-md-12">
                         <div class="card info-card sales-card">
-                            <a asp-area="Admin" asp-controller="SEC_User" asp-action="SEC_UserList">
+                            <a asp-area="Admin" asp-controller="MST_User" asp-action="MST_UserList">
                                 <div class="card-body">
                                     <h5 class="card-title">User</h5>
 
@@ -78,60 +78,60 @@
                     <!-- Movie -->
                     <div class="col-xxl-4 col-md-3">
                         <div class="card info-card sales-card">
+                            <a asp-area="Admin" asp-controller="Movie" asp-action="MST_MovieList">
+                                <div class="card-body">
+                                    <h5 class="card-title">Movie</h5>
 
-                            <div class="card-body">
-                                <h5 class="card-title">Movie</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-camera-reels"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h5 class="mb-0">@Model.Rows[0]["MovieCount"]</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-camera-reels"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h5 class="mb-0">@Model.Rows[0]["MovieCount"]</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </a>
                         </div>
                     </div>
                     <!-- End Movie -->
                     <!-- State -->
                     <div class="col-xxl-4 col-md-3">
                         <div class="card info-card sales-card">
+                            <a asp-area="Admin" asp-controller="LOC_State" asp-action="LOC_StateList">
+                                <div class="card-body">
+                                    <h5 class="card-title">State</h5>
 
-                            <div class="card-body">
-                                <h5 class="card-title">State</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-geo"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h5 class="mb-0">@Model.Rows[0]["StateCount"]</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-geo"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h5 class="mb-0">@Model.Rows[0]["StateCount"]</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </a>
                         </div>
                     </div>
                     <!-- End State -->
                     <!-- City -->
                     <div class="col-xxl-4 col-md-3">
                         <div class="card info-card sales-card">
+                            <a asp-area="Admin" asp-controller="LOC_City" asp-action="LOC_CityList">
+                                <div class="card-body">
+                                    <h5 class="card-title">City</h5>
 
-                            <div class="card-body">
-                                <h5 class="card-title">City</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-compass"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h5 class="mb-0">@Model.Rows[0]["CityCount"]</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-compass"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h5 class="mb-0">@Model.Rows[0]["CityCount"]</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </a>
                         </div>
                     </div>
                     <!-- End City -->

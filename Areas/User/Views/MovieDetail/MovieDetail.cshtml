@@ -45,37 +45,16 @@
     </div>
 </section>
 <!-- ==========Banner-Section========== -->
-
 <!-- ==========Book-Section========== -->
 <section class="book-section bg-one">
     <div class="container">
         <div class="book-wrapper offset-lg-3">
             <div class="left-side">
                 <div class="item">
-                    <div class="item-header">
-                        <div class="thumb">
-                            <img src="~/assets2/images/movie/tomato2.png" alt="movie">
-                        </div>
-                        <div class="counter-area">
-                            <span class="counter-item odometer" data-odometer-final="88">0</span>
-                        </div>
-                    </div>
-                    <p>tomatometer</p>
                 </div>
                 <div class="item">
                     <div class="item-header">
-                        <div class="thumb">
-                            <img src="~/assets2/images/movie/cake2.png" alt="movie">
-                        </div>
-                        <div class="counter-area">
-                            <span class="counter-item odometer" data-odometer-final="88">0</span>
-                        </div>
-                    </div>
-                    <p>audience Score</p>
-                </div>
-                <div class="item">
-                    <div class="item-header">
-                        <h5 class="title">4.5</h5>
+                        <h5 class="title">@Model.Rating</h5>
                         <div class="rated">
                             <i class="fas fa-heart"></i>
                             <i class="fas fa-heart"></i>
@@ -105,7 +84,6 @@
     </div>
 </section>
 <!-- ==========Book-Section========== -->
-
 <!-- ==========Movie-Section========== -->
 <section class="movie-details-section padding-top padding-bottom">
     <div class="container">
@@ -206,15 +184,15 @@
                     </div>
                     <div class="tab summery-review">
                         <ul class="tab-menu">
-                            <li>
+                            <li class="active">
                                 summery
                             </li>
-                            <li class="active">
+                            <li class="">
                                 user review <span>147</span>
                             </li>
                         </ul>
                         <div class="tab-area">
-                            <div class="tab-item">
+                            <div class="tab-item active">
                                 <div class="item">
                                     <h5 class="sub-title">Synopsis</h5>
                                     <p>@Model.Description</p>
@@ -334,7 +312,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-item active">
+                            <div class="tab-item">
                                 <div class="movie-review-item">
                                     <div class="author">
                                         <div class="thumb">
@@ -491,3 +469,28 @@
     </div>
 </section>
 <!-- ==========Movie-Section========== -->
+
+@section Scripts {
+    <!-- Include Magnific Popup CSS and JavaScript files -->
+    <link rel="stylesheet" href="path/to/magnific-popup.css">
+    <script src="path/to/jquery.min.js"></script>
+    <script src="path/to/jquery.magnific-popup.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.video-popup').magnificPopup({
+                type: 'iframe',
+                iframe: {
+                    patterns: {
+                        youtube: {
+                            index: 'youtube.com/',
+                            id: 'v=',
+                            src: '@Model.TrailerURL'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+}

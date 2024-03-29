@@ -94,8 +94,8 @@
                                 <option>Select Cinema</option>
                             </select>
                         </div> <!--Cinema DropDown--> *@
-                        <div class="form-group col large">
-                            <input type="text" placeholder="Search for Movies">
+                        <div class="form-group col large" id="sample_1_filter">
+                            <input type="text" asp-for="@FilterModel.Title" placeholder="Search for Movies" id="sample_1" aria-controls="sample_1">
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
@@ -128,7 +128,7 @@
                     <div class="owl-carousel owl-theme tab-slider">
                         @foreach (DataRow dataRow in Model.Rows)
                         {
-                            <div class="item">
+                            <div class="item" id="sample_2">
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
                                         <a asp-route-MovieID="@dataRow["MovieID"]" asp-area="User" asp-controller="MovieDetail" asp-action="MovieDetail">
@@ -137,7 +137,7 @@
                                     </div>
                                     <div class="movie-content bg-one">
                                         <h5 class="title m-0">
-                                            <a href="#0">@dataRow["Title"]</a>
+                                            <a asp-route-MovieID="@dataRow["MovieID"]" asp-area="User" asp-controller="MovieDetail" asp-action="MovieDetail">@dataRow["Title"]</a>
                                         </h5>
                                         <ul class="movie-rating-percent">
                                             <li>
@@ -227,6 +227,19 @@
 
 
 @section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $("#sample_1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#sample_2 .movie-grid").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+
+    </script>
+
     <script>
         function fnOnStateChange() {
             var stateID = $("#StateID").val();

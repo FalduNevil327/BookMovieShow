@@ -101,7 +101,8 @@ namespace BookMovieShow.DAL.MovieList
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
                 DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_UserDashBoard_Filter");
                 sqlDatabase.AddInParameter(dbCommand, "@StateID", DbType.Int32, filterModel.StateID);
-                sqlDatabase.AddInParameter(dbCommand, "@CityID", DbType.String, filterModel.CityID);
+                sqlDatabase.AddInParameter(dbCommand, "@CityID", DbType.Int32, filterModel.CityID);
+                sqlDatabase.AddInParameter(dbCommand, "@Title", DbType.String, filterModel.Title);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
                 {
