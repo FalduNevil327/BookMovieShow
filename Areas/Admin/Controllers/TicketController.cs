@@ -59,7 +59,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
         }
         #endregion
 
-        #region Delete Ticket
+        #region Delete Ticket Details
         public IActionResult Ticket_Delete(int TicketID)
         {
             bool iSuccess = ticket_DAL.PR_Tickets_Delete(TicketID);
@@ -75,7 +75,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
         }
         #endregion
 
-        #region Ticket_Search
+        #region Ticket_Search By UserName
         public IActionResult Ticket_Search(string? UserName)
         {
 
