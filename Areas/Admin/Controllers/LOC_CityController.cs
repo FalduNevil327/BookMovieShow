@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
-using BookMovieShow.DAL.LOC_City;
 using System.Data.SqlClient;
 using BookMovieShow.Areas.Admin.Model;
 using ClosedXML.Excel;
+using BookMovieShow.DAL.LOC_City;
 
 namespace BookMovieShow.Areas.LOC_City.Controllers
 {
@@ -42,6 +42,7 @@ namespace BookMovieShow.Areas.LOC_City.Controllers
             {
                 if (cityDAL.PR_City_Insert(modelCity))
                 {
+                    TempData["Msg"] = "Record Inserted Successfully";
                     return RedirectToAction("LOC_CityList");
                 }
 

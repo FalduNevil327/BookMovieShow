@@ -52,7 +52,7 @@ namespace BookMovieShow.DAL.Cinemas
                 {
                     DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Cinemas_Update");
 
-                    sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, mST_CinemaModel.CinemaID); 
+                    sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, mST_CinemaModel.CinemaID);
                     sqlDatabase.AddInParameter(dbCommand, "@CinemaName", DbType.String, mST_CinemaModel.CinemaName);
                     //sqlDatabase.AddInParameter(dbCommand, "@Location", DbType.String, mST_CinemaModel.Location);
                     sqlDatabase.AddInParameter(dbCommand, "@CityID", DbType.Int32, mST_CinemaModel.CityID);

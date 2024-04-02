@@ -3,7 +3,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;
 
-namespace BookMovieShow.DAL.Customer
+namespace BookMovieShow.DAL.MST_User
 {
     public class MST_UserDALBase : Dal_Helper
     {

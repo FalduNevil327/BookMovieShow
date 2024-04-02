@@ -27,11 +27,11 @@ namespace BookMovieShow.Areas.Admin.Controllers
         #region SelectAll
         public IActionResult ShowTime_List(int CinemaID , int MovieID)
         {
-            ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
+            //ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
             //ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
             //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
-            ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
-            ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
+            //ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+            //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
             DataTable dt = sTDAL.PR_ShowTimes_SelectAll();
             return View(dt);
         }
@@ -40,15 +40,12 @@ namespace BookMovieShow.Areas.Admin.Controllers
         #region ShowTime Save
         public IActionResult ShowTime_Save(ShowTimeModel showTimeModel)
         {
-            if (ModelState.IsValid)
-            {
                 if (sTDAL.PR_ShowTimes_Insert(showTimeModel))
                 {
                     TempData["Msg"] = "Record Inserted Successfully";
                     return RedirectToAction("ShowTime_List");
                 }
 
-            }
             TempData["Msg"] = "Record Inserted Error";
             return View("ShowTime_List");
         }
@@ -63,20 +60,20 @@ namespace BookMovieShow.Areas.Admin.Controllers
             {
                 TempData["PageTitle"] = "ShowTime Edit Page";
                 ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
-                //ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
-                //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
-                ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
-                ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
+                ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
+                ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
+                //ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+                //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
                 return View("ShowTime_Add", showTimeModel);
             }
             else
             {
                 TempData["PageTitle"] = "ShowTime Edit Page";
                 ViewBag.CinemaList = sTDAL.PR_Cinemas_ComboBox();
-                //ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
-                //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
-                ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
-                ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
+                ViewBag.MovieList = sTDAL.PR_Movies_ComboBox();
+                ViewBag.ScreenList = sTDAL.PR_Screens_ComboBox();
+                //ViewBag.MovieList = sTDAL.PR_Movies_ComboBoxbyCinemaID(CinemaID);
+                //ViewBag.ScreenList = sTDAL.PR_Screens_ComboBoxbyCinemaIDAndMovieID(CinemaID, MovieID);
                 return View("ShowTime_Add");
             }
         }
@@ -205,70 +202,6 @@ namespace BookMovieShow.Areas.Admin.Controllers
 
         #endregion
 
-        #region PR_Movies_ComboBoxbyCinemaID
-        public List<MST_MoviesDropDownModel> PR_Movies_ComboBoxbyCinemaID(int CinemaID)
-        {
-            try
-            {
-                //string ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("ConnectionString");
-                string ConnectionString = this.Configuration.GetConnectionString("ConnectionString");
-                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Movies_ComboBoxbyCinemaID");
-                sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, CinemaID);
-                DataTable dataTable = new DataTable();
-                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
-                {
-                    dataTable.Load(dataReader);
-                }
-                List<MST_MoviesDropDownModel> listOfMovie = new List<MST_MoviesDropDownModel>();
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    MST_MoviesDropDownModel model = new MST_MoviesDropDownModel();
-                    model.MovieID = Convert.ToInt32(dataRow["MovieID"]);
-                    model.Title = dataRow["Title"].ToString();
-                    listOfMovie.Add(model);
-                }
-                return listOfMovie;
-
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-        #endregion
-
-        #region PR_Screens_ComboBoxbyCinemaIDAndMovieID
-        public List<Screens_DropDownModel> PR_Screens_ComboBoxbyCinemaIDAndMovieID(int? CinemaID, int? MovieID)
-        {
-            try
-            {
-                string ConnectionString = this.Configuration.GetConnectionString("ConnectionString");
-                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Screens_ComboBoxbyCinemaIDAndMovieID");
-                sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, CinemaID);
-                sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, MovieID);
-                DataTable dataTable = new DataTable();
-                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
-                {
-                    dataTable.Load(dataReader);
-                }
-                List<Screens_DropDownModel> listOfScreens = new List<Screens_DropDownModel>();
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    Screens_DropDownModel model = new Screens_DropDownModel();
-                    model.ScreenID = Convert.ToInt32(dataRow["ScreenID"]);
-                    model.ScreenName = dataRow["ScreenName"].ToString();
-                    listOfScreens.Add(model);
-                }
-                return listOfScreens;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-        #endregion
 
         public IActionResult MovieDropDownByCinemaID(int CinemaID)
         {

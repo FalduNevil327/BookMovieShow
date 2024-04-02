@@ -1,6 +1,6 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
 using BookMovieShow.DAL.Cinemas;
-using BookMovieShow.DAL.Customer;
+using BookMovieShow.DAL.MST_User;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;

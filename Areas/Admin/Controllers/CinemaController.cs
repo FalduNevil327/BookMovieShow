@@ -1,11 +1,11 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
-using BookMovieShow.DAL.Cinemas;
 using BookMovieShow.DAL.MST_Movie;
 using ClosedXML.Excel;
 using System.Data.SqlClient;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using BookMovieShow.DAL.Cinemas;
 
 namespace BookMovieShow.Areas.Admin.Controllers
 {

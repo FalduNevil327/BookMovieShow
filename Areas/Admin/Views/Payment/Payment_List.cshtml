@@ -1,0 +1,214 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Payment List";
+}
+@using System.Data
+@model DataTable;
+
+<main class="main" id="main">
+
+    @if (TempData["Msg"] != null)
+    {
+        <div id="Feature-alert" class="alert alert-success color-success">
+            <i class="bi bi-check-circle"></i> @TempData["Msg"]
+        </div>
+
+        <script>
+            setTimeout(function () {
+                $('#Feature-alert').fadeOut('fast');
+            }, 2000); // 2 seconds
+        </script>
+    }
+    <!--Heading-->
+    <div class="pagetitle">
+        <h1>Payment List</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Admin" asp-action="Admin_DashBoard">Home</a></li>
+                <li class="breadcrumb-item active">PaymentList</li>
+            </ol>
+        </nav>
+    </div>
+    <!--End Heading-->
+    <!--Search Bar-->
+    @* col-xl-4 ms-lg-auto d-flex *@
+    <div class="search-field">
+        <div class="me-3">
+            <form class="d-flex" method="get" asp-area="Admin" asp-controller="Payment" asp-action="Payment_Search">
+                <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search" runat="server" name="UserName" />
+                <div><button type="submit" class="btn btn-success" value="Search" runat="server">Search</button></div>
+                <div style="margin-left: 10px;"><button type="reset" class="btn btn-secondary" value="Reset" runat="server">Reset</button></div>
+            </form>
+        </div>
+    </div>
+    <br />
+
+    <!--End Search Bar-->
+    <!--Start ListPage-->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <!--External button-->
+                    <div class="d-flex justify-content-between card-header">
+                        @* <!--Search bar-->
+                        <div class="col-7 pull-right">
+                            <div id="sample_1_filter" class="dataTables_filter">
+                                <input type="text" class="form-control input-group-sm input-small input-inline" id="sample_1" placeholder="Search" aria-controls="sample_1">
+                            </div>
+                        </div>
+                        <!--End Search bar--> *@
+                        <div class="col-md-4" style="margin-inline-start: auto;">
+                            @* <a type="button" class="btn btn-outline-dark" asp-area="Admin" asp-controller="Payment" asp-action="Payment_Add">
+                                Add
+                            </a> *@
+
+                            <a type="button" class="btn btn-outline-primary" asp-area="Admin" asp-controller="Payment" asp-action="ExportSToExcel">
+                                Export
+                            </a>
+
+                            <a type="button" class="btn btn-outline-danger" id="deleteSelectedBtn" asp-area="Admin" asp-controller="Payment" asp-action="MultipleDelete">Multiple Delete</a>
+                        </div>
+
+                    </div>
+                    <!--End External button-->
+
+                    <div class="card-body">
+
+                        <!-- Table with hoverable rows -->
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    @*<th>Check</th>*@
+                                    <th><input type="checkbox" class="selectall" name="sample"></th>
+                                    @* <th scope="col">Payment ID</th> *@
+                                    @* <th scope="col">User ID</th> *@
+                                    <th scope="col">UserName</th>
+                                    @* <th scope="col">ShowTime ID</th> *@
+                                    <th scope="col">ShowTime</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Transaction ID</th>
+                                    <th scope="col">Payment Date</th>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow dr in Model.Rows)
+                                {
+                                    <tr>
+                                        <td><input type="checkbox" class="chkDelete" name="chkDeleteName" value="@dr["PaymentID"]"></td>
+                                        @* <td>@dr["PaymentID"]</td> *@
+                                        @* <td>@dr["UserID"]</td> *@
+                                        <td>@dr["UserName"]</td>
+                                        @* <td>@dr["ShowTimeID"]</td> *@
+                                        <td>@Convert.ToDateTime(dr["ShowTime"]).ToString("hh:mm")</td>
+                                        <td>@dr["Amount"]</td>
+                                         <td>@dr["TransactionID"]</td>
+                                        <td>@dr["PaymentDate"]</td>
+                                        <td>@dr["PaymentStatus"]</td>
+                                        <td>
+                                            <div class="d-flex" style="justify-content: center;">
+
+                                                <div class="me-2">
+                                                    <form method="post" asp-area="Admin" asp-controller="Payment" asp-action="Payment_Delete">
+                                                        <input type="hidden" value="@Convert.ToInt32(dr["PaymentID"])" name="PaymentID" />
+
+                                                        <button type="submit" class="btn btn-danger" value="Delete" onclick="return fun1();"><i class="bi bi-bucket"></i></button>
+                                                    </form>
+                                                </div>
+                                                @* <div class="ms-2">
+                                                    <form asp-area="Admin" asp-controller="Payment" asp-action="Payment_Add">
+                                                        <input type="hidden" value="@Convert.ToInt32(dr["PaymentID"])" name="PaymentID" />
+                                                        <button type="submit" class="btn btn-success"><i class="bi bi-pen"></i></button>
+                                                    </form>
+                                                </div> *@
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with hoverable rows -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End ListPage-->
+
+
+
+</main>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#sample_1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#sample_2 .tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+
+    </script>
+    <!--SelectAll-->
+    <script>
+        $('.selectall').click(function () {
+            if ($(this).is(':checked')) {
+                $('td input').attr('checked', true);
+            } else {
+                $('td input').attr('checked', false);
+            }
+        });
+    </script>
+    <!--End SelectAll-->
+    <!--Alert-->
+    <script>
+        function fun1() {
+            if (confirm("Are you sure you want to delete?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+    <!--End Alert-->
+    <!--Multiple Delete-->
+    <script>
+        $(document).ready(function () {
+            console.log("Hello");
+            $("#deleteSelectedBtn").on("click", function (e) {
+                var confirmation = confirm("Are you sure?")
+                if (confirmation) {
+
+                    e.preventDefault();
+                    var data = [];
+                    $("input[name='chkDeleteName']:checked").each(function () {
+                        data.push($(this).val());
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("MultipleDelete")",
+                        data: { id: data },
+                        traditional: true,
+                        success: function (result) {
+                            //alert("done");
+                            alert("Delete Success")
+                            location.reload();
+                        }
+                    })
+                }
+                else
+                    alert("Delete Canceled")
+            })
+        })
+
+    </script>
+    <!--End Multiple Delete-->
+}

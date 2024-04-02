@@ -44,7 +44,6 @@ namespace BookMovieShow.Areas.Admin.Controllers
                     return RedirectToAction("Profile");
                 }
 
-            TempData["Msg"] = "Record Inserted Error";
             return View("Profile");
         }
         #endregion

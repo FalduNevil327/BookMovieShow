@@ -5,7 +5,7 @@ using System.Data.Common;
 
 namespace BookMovieShow.DAL.LOC_City
 {
-    public class LOC_CityDALBase :Dal_Helper
+    public class LOC_CityDALBase : Dal_Helper
     {
         #region  PR_City_SelectAll
         public DataTable PR_City_SelectAll()

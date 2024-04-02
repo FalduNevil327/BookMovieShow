@@ -46,7 +46,6 @@ namespace BookMovieShow.Areas.Admin.Controllers
             {
                 if (cWMDAL.PR_CinemaWithMovies_Insert(cWM))
                 {
-                    Console.WriteLine(cWM.MovieIDs);
                     TempData["Msg"] = "Record Inserted Successfully";
                     return RedirectToAction("CinemaWithMovies_List");
                 }

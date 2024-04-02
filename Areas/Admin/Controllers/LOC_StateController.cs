@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Data;
-using BookMovieShow.DAL.LOC_State;
 using BookMovieShow.Areas.Admin.Model;
 using ClosedXML.Excel;
+using BookMovieShow.DAL.LOC_State;
 
 namespace BookMovieShow.Areas.LOC_State.Controllers
 {
@@ -61,6 +61,7 @@ namespace BookMovieShow.Areas.LOC_State.Controllers
             {
                 if (stateDAL.PR_State_Insert(stateModel))
                 {
+                    TempData["Msg"] = "Record Inserted Successfully";
                     return RedirectToAction("LOC_StateList");
                 }
 

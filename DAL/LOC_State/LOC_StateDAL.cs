@@ -35,7 +35,7 @@ namespace BookMovieShow.DAL.LOC_State
             }
         }
         #endregion
-        
+
         #region PR_State_Filter
         public DataTable PR_State_Filter(LOC_StateFilterModel filterModel)
         {

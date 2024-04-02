@@ -5,7 +5,7 @@ using System.Data.Common;
 
 namespace BookMovieShow.DAL.LOC_City
 {
-    public class LOC_CityDAL :LOC_CityDALBase
+    public class LOC_CityDAL : LOC_CityDALBase
     {
 
         #region PR_State_ComboBox

@@ -137,7 +137,7 @@ namespace BookMovieShow.DAL.MST_Movie
         }
         #endregion
 
-        
+
 
     }
 }

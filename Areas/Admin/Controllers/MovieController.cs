@@ -40,6 +40,7 @@ namespace BookMovieShow.Areas.Admin.Controllers
             {
                 if (mST_MovieDAL.PR_Movies_Insert(mST_MovieModel))
                 {
+                    TempData["Msg"] = "Record Inserted Successfully";
                     return RedirectToAction("MST_MovieList");
                 }
 

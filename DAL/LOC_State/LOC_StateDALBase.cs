@@ -5,7 +5,7 @@ using System.Data.Common;
 
 namespace BookMovieShow.DAL.LOC_State
 {
-    public class LOC_StateDALBase :Dal_Helper
+    public class LOC_StateDALBase : Dal_Helper
     {
         #region PR_State_SelectAll
         public DataTable PR_State_SelectAll()
@@ -39,7 +39,7 @@ namespace BookMovieShow.DAL.LOC_State
                     DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_State_Insert");
                     sqlDatabase.AddInParameter(dbCommand, "@StateName", DbType.String, lOC_StateModel.StateName);
                     sqlDatabase.AddInParameter(dbCommand, "@StateCode", DbType.String, lOC_StateModel.StateCode);
-                   
+
                     Console.WriteLine("SuccessDALAdd");
                     bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                     return isSuccess;
@@ -51,7 +51,7 @@ namespace BookMovieShow.DAL.LOC_State
                     sqlDatabase.AddInParameter(dbCommand, "@StateID", DbType.Int32, lOC_StateModel.StateID);
                     sqlDatabase.AddInParameter(dbCommand, "@StateName", DbType.String, lOC_StateModel.StateName);
                     sqlDatabase.AddInParameter(dbCommand, "@StateCode", DbType.String, lOC_StateModel.StateCode);
-                    
+
                     Console.WriteLine("SuccessDALUpdate");
                     bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
                     return isSuccess;
