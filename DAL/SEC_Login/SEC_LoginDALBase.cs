@@ -7,7 +7,7 @@ using BookMovieShow.Areas.SEC_Login.Models;
 
 namespace BookMovieShow.DAL.SEC_Login
 {
-    public class SEC_LoginDALBase: Dal_Helper
+    public class SEC_LoginDALBase : Dal_Helper
     {
 
         #region Method: PR_SEC_Login_SelectByUserNamePassword
@@ -38,8 +38,8 @@ namespace BookMovieShow.DAL.SEC_Login
         #region Method: SEC_User_Register
         public bool SEC_User_Register(SEC_LoginModel sEC_LoginModel)
         {
-            
-            
+
+
             if (sEC_LoginModel.ProfilePhoto != null)
             {
                 string FilePath = "wwwroot\\images";

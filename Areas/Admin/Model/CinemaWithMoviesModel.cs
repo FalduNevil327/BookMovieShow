@@ -5,7 +5,7 @@ namespace BookMovieShow.Areas.Admin.Model
     public class CinemaWithMoviesModel
     {
         
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         [Required(ErrorMessage = "Please select at least one movie.")]
         public List<int>? MovieIDs { get; set; }

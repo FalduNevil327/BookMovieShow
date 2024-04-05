@@ -3,7 +3,7 @@ using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Data;
-using BookMovieShow.DAL.Payment;
+using BookMovieShow.DAL.Admin.Payment;
 
 namespace BookMovieShow.Areas.Admin.Controllers
 {

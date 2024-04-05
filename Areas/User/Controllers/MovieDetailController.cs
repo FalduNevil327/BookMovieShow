@@ -1,6 +1,5 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
-using BookMovieShow.DAL.MovieDetail;
-using BookMovieShow.DAL.MST_Movie;
+using BookMovieShow.DAL.User.MovieDetail;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookMovieShow.Areas.User.Controllers

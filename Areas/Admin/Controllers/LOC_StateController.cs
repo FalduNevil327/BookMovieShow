@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Data;
 using BookMovieShow.Areas.Admin.Model;
 using ClosedXML.Excel;
-using BookMovieShow.DAL.LOC_State;
+using BookMovieShow.DAL.Admin.LOC_State;
 
 namespace BookMovieShow.Areas.LOC_State.Controllers
 {

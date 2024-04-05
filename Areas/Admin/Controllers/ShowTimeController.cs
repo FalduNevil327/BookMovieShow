@@ -1,6 +1,4 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
-using BookMovieShow.DAL.Screen;
-using BookMovieShow.DAL.ShowTime;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
@@ -9,6 +7,7 @@ using DocumentFormat.OpenXml.EMMA;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.Common;
+using BookMovieShow.DAL.Admin.ShowTime;
 
 namespace BookMovieShow.Areas.Admin.Controllers
 {

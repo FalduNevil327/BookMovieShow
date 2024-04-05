@@ -1,10 +1,9 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
-using BookMovieShow.DAL.Payment;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using System.Data;
-using BookMovieShow.DAL.Booking;
+using BookMovieShow.DAL.Admin.Booking;
 
 namespace BookMovieShow.Areas.Admin.Controllers
 {

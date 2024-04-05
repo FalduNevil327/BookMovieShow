@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookMovieShow.Areas.User.Model;
+using BookMovieShow.DAL.User.TicketPlan;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace BookMovieShow.Areas.User.Controllers
 {
@@ -6,9 +9,11 @@ namespace BookMovieShow.Areas.User.Controllers
     [Route("User/[controller]/[action]")]
     public class TicketPlanController : Controller
     {
-        public IActionResult TicketPlan()
+        TicketPlan_DAL tDAL = new TicketPlan_DAL();
+        public IActionResult TicketPlan(int MovieID)
         {
-            return View();
+            List<TicketPlanModel> list = tDAL.PR_Showtimes_ByMovieID(MovieID);
+            return View(list);
         }
     }
 }

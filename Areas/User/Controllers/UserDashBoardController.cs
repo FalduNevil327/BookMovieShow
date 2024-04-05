@@ -1,12 +1,11 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
 using BookMovieShow.Areas.User.Model;
 using BookMovieShow.BAL;
-using BookMovieShow.DAL.Cinemas;
-using BookMovieShow.DAL.CinemaWithMovies;
-using BookMovieShow.DAL.MovieDetail;
-using BookMovieShow.DAL.MovieList;
-using BookMovieShow.DAL.MST_Movie;
-using BookMovieShow.DAL.UserDashBoard;
+using BookMovieShow.DAL.Admin.Cinemas;
+using BookMovieShow.DAL.Admin.CinemaWithMovies;
+using BookMovieShow.DAL.User.MovieDetail;
+using BookMovieShow.DAL.User.MovieList;
+using BookMovieShow.DAL.User.UserDashBoard;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +18,13 @@ namespace BookMovieShow.Areas.User.Controllers
     [Route("User/[controller]/[action]")]
     public class UserDashBoardController : Controller
     {
-        CinemasDAL cinemasDAL = new CinemasDAL(); 
-        CinemaWithMoviesDAL cWMDAL = new CinemaWithMoviesDAL();
-        MovieListDAL Ml = new MovieListDAL();
+        
         UserDashboard_DAL UD  = new UserDashboard_DAL();
-        MovieDetail_DALBase movieDetail_DAL = new MovieDetail_DAL();
 
         #region User_DashBoard
         public IActionResult User_DashBoard(int StateID, int CityID)
         {
-            ViewBag.StateList = cinemasDAL.PR_State_ComboBox();
+            ViewBag.StateList = UD.PR_State_ComboBox();
             ViewBag.CityList = UD.PR_City_ComboBoxbyStateID(StateID);
             ViewBag.CinemaList = UD.PR_Cinema_ComboBoxByStateIDAndCityID(StateID,CityID);
             DataTable dt = new DataTable();
@@ -40,7 +36,7 @@ namespace BookMovieShow.Areas.User.Controllers
         #region MovieList
         public IActionResult MovieList(int StateID, int CityID)
         {
-            ViewBag.StateList = cinemasDAL.PR_State_ComboBox();
+            ViewBag.StateList = UD.PR_State_ComboBox();
             ViewBag.CityList = UD.PR_City_ComboBoxbyStateID(StateID);
             ViewBag.CinemaList = UD.PR_Cinema_ComboBoxByStateIDAndCityID(StateID, CityID);
             DataTable dt = new DataTable();
@@ -48,18 +44,6 @@ namespace BookMovieShow.Areas.User.Controllers
             return View(dt);
         }
         #endregion
-
-        //#region MovieListByCity
-        //public IActionResult MovieListByCity(int StateID, int CityID, int CinemaID)
-        //{
-        //    ViewBag.StateList = cinemasDAL.PR_State_ComboBox();
-        //    ViewBag.CityList = UD.PR_City_ComboBoxbyStateID(StateID);
-        //    ViewBag.CinemaList = UD.PR_Cinema_ComboBoxByStateIDAndCityID(StateID, CityID);
-        //    DataTable dt = new DataTable();
-        //    dt = Ml.PR_Movies_SelectByStateCityAndCinemaID(StateID, CityID, CinemaID);
-        //    return View("User_DashBoard", dt);
-        //}
-        //#endregion
 
         #region CityDropDownByStateID
         public IActionResult CityDropDownByStateID(int StateID)
@@ -84,8 +68,8 @@ namespace BookMovieShow.Areas.User.Controllers
         public IActionResult UserDashBoard_Filter(UserDashBoard_FilterModel filterModel)
         {
             DataTable dt = UD.PR_UserDashBoard_Filter(filterModel);
-            ViewBag.StateList = cinemasDAL.PR_State_ComboBox();
-            ViewBag.CityList = cinemasDAL.PR_City_ComboBox();
+            ViewBag.StateList = UD.PR_State_ComboBox();
+            ViewBag.CityList = UD.PR_City_ComboBox();
             return View("User_DashBoard", dt); 
         }
         #endregion

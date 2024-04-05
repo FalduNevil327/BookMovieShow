@@ -1,5 +1,5 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
-using BookMovieShow.DAL.Ticket;
+using BookMovieShow.DAL.Admin.Ticket;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;

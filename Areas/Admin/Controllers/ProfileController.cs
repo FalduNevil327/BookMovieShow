@@ -1,6 +1,5 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
-using BookMovieShow.DAL.Cinemas;
-using BookMovieShow.DAL.Profile;
+using BookMovieShow.DAL.Admin.Profile;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 

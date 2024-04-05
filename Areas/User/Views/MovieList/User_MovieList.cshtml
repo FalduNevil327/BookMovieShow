@@ -274,7 +274,7 @@
                                 {
                                     <div class="movie-list">
                                         <div class="movie-thumb c-thumb">
-                                            <a href="movie-details.html" class="w-100 bg_img h-100" data-background="@Url.Content(dataRow["PosterImageURL"].ToString())">
+                                            <a asp-route-MovieID="@dataRow["MovieID"]" asp-area="User" asp-controller="MovieDetail" asp-action="MovieDetail" class="w-100 bg_img h-100" data-background="@Url.Content(dataRow["PosterImageURL"].ToString())">
                                                 <img class="d-sm-none" src=@dataRow["PosterImageURL"] alt="movie">
                                             </a>
                                         </div>
@@ -313,7 +313,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="react-item mr-auto">
-                                                        <a href="#0">
+                                                        <a asp-route-MovieID="@dataRow["MovieID"]" asp-area="User" asp-controller="TicketPlan" asp-action="TicketPlan">
                                                             <div class="thumb">
                                                                 <img src="~/assets2/images/icons/book.png" alt="icons">
                                                             </div>
@@ -321,13 +321,14 @@
                                                         </a>
                                                     </div>
                                                     <div class="react-item">
-                                                        <a src=@dataRow["TrailerURL"] class="popup-video">
+                                                        <a href="@dataRow["TrailerURL"]" class="popup-video" data-trailer-url="@dataRow["TrailerURL"]">
                                                             <div class="thumb">
                                                                 <img src="~/assets2/images/icons/play-button.png" alt="icons">
                                                             </div>
-                                                            <span>watch trailer</span>
+                                                            <span>Watch Trailer</span>
                                                         </a>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -335,19 +336,19 @@
                                 }
                             </div>
                         </div><!--Movie List-->
-                    </div> 
-                    <!--List System End-->
-                    <!--Pagenation Start-->
-                    <div class="pagination-area text-center">
-                        <a href="#0"><i class="fas fa-angle-double-left"></i><span>Prev</span></a>
-                        <a href="#0">1</a>
-                        <a href="#0">2</a>
-                        <a href="#0" class="active">3</a>
-                        <a href="#0">4</a>
-                        <a href="#0">5</a>
-                        <a href="#0"><span>Next</span><i class="fas fa-angle-double-right"></i></a>
                     </div>
-                    <!--Pagenation End-->
+                    <!--List System End-->
+                    @* <!--Pagenation Start-->
+                    <div class="pagination-area text-center">
+                    <a href="#0"><i class="fas fa-angle-double-left"></i><span>Prev</span></a>
+                    <a href="#0">1</a>
+                    <a href="#0">2</a>
+                    <a href="#0" class="active">3</a>
+                    <a href="#0">4</a>
+                    <a href="#0">5</a>
+                    <a href="#0"><span>Next</span><i class="fas fa-angle-double-right"></i></a>
+                    </div>
+                    <!--Pagenation End--> *@
                 </div>
             </div>
         </div>
@@ -355,6 +356,32 @@
 </section>
 <!-- Movie-Section -->
 @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".popup-video").on("click", function (e) {
+                e.preventDefault();
+                var trailerURL = $(this).attr("href");
+                openPopup(trailerURL);
+            });
+
+            function openPopup(videoURL) {
+                var width = 560;
+                var height = 315;
+                var left = window.innerWidth / 2 - width / 2;
+                var top = window.innerHeight / 2 - height / 2;
+                var options = "width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;
+
+                // Open a popup window with the embedded YouTube video player
+                var popup = window.open(videoURL, "_blank", options);
+                if (popup) {
+                    popup.focus();
+                } else {
+                    alert("Please allow pop-ups for this site.");
+                }
+            }
+        });
+
+    </script>
 
     <script>
         $(document).ready(function () {

@@ -1,7 +1,5 @@
 ﻿using BookMovieShow.Areas.Admin.Model;
-using BookMovieShow.DAL.Cinemas;
-using BookMovieShow.DAL.MST_Movie;
-using BookMovieShow.DAL.Screen;
+using BookMovieShow.DAL.Admin.Screen;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
