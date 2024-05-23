@@ -51,6 +51,8 @@ namespace BookMovieShow.DAL.User.SeatPlan
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
                 DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Showtimes_ForSeatPlan");
                 sqlDatabase.AddInParameter(dbCommand, "@ShowTimeID", DbType.Int32, ShowTimeID);
+                //sqlDatabase.AddInParameter(dbCommand, "@MovieID", DbType.Int32, MovieID);
+                //sqlDatabase.AddInParameter(dbCommand, "@CinemaID", DbType.Int32, CinemaID);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
                 {
@@ -58,7 +60,7 @@ namespace BookMovieShow.DAL.User.SeatPlan
                 }
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    Model.Title = dr["MovieTitle"].ToString();
+                    Model.Title = dr["Title"].ToString();
                     Model.Genre = dr["Genre"].ToString();
                     Model.Language = dr["Language"].ToString();
                     Model.ShowTime = Convert.ToDateTime(dr["ShowTime"]);

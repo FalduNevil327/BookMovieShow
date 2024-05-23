@@ -11,7 +11,7 @@ namespace BookMovieShow.Areas.User.Controllers
     {
         TicketPlan_DAL tDAL = new TicketPlan_DAL();
         public IActionResult TicketPlan(int MovieID)
-        {
+            {
             List<TicketPlanModel> list = tDAL.PR_Showtimes_ByMovieID(MovieID);
             return View(list);
         }

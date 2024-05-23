@@ -36,6 +36,10 @@ namespace BookMovieShow.DAL.User.TicketPlan
                             rowModel.Genre = model.Genre;
                             rowModel.CinemaName = dataReader["CinemaName"].ToString();
                             rowModel.ShowTime = Convert.ToDateTime(dataReader["ShowTime"]);
+                            rowModel.ShowTimeID = Convert.ToInt32(dataReader["ShowTimeID"]);
+                            rowModel.MovieID = Convert.ToInt32(dataReader["MovieID"]);
+                            rowModel.CinemaID = Convert.ToInt32(dataReader["CinemaID"]);
+
                             // Add other properties as needed
 
                             ticketPlanModel.Add(rowModel);
