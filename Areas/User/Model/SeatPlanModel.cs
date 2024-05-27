@@ -2,6 +2,7 @@
 {
     public class SeatPlanModel
     {
+        public int ShowtimeID { get; set; }
         public int? MovieID { get; set; }
         public int? Price { get; set; }
         public string? Title { get; set; }

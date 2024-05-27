@@ -60,6 +60,7 @@ namespace BookMovieShow.DAL.User.SeatPlan
                 }
                 foreach (DataRow dr in dataTable.Rows)
                 {
+                    Model.ShowtimeID = Convert.ToInt32(dr["ShowtimeID"]);
                     Model.Title = dr["Title"].ToString();
                     Model.Genre = dr["Genre"].ToString();
                     Model.Language = dr["Language"].ToString();

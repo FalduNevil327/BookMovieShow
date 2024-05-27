@@ -1,5 +1,8 @@
-﻿using BookMovieShow.BAL;
+﻿using BookMovieShow.Areas.User.Model;
+using BookMovieShow.BAL;
+using BookMovieShow.DAL.User.Payment;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace BookMovieShow.Areas.User.Controllers
 {
@@ -7,10 +10,12 @@ namespace BookMovieShow.Areas.User.Controllers
     [Route("User/[controller]/[action]")]
     public class PaymentController : Controller
     {
-        [CheckAccess]
-        public IActionResult Payment()
+
+        //[CheckAccess]
+        public IActionResult Payment(PaymentModel model)
         {
-            return View();
+            return View(model);
         }
+
     }
 }
